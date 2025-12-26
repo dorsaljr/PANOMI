@@ -10,8 +10,8 @@ namespace Panomi.UI.Services;
 /// </summary>
 public static class UpdateService
 {
-    // TODO: Replace with your actual GitHub repo
-    private const string GitHubRepoUrl = "https://github.com/panodev/panomi";
+    // GitHub repo for auto-updates
+    private const string GitHubRepoUrl = "https://github.com/dorsaljr/PANOMI_BETA";
     
     private static UpdateManager? _updateManager;
     private static UpdateInfo? _pendingUpdate;
