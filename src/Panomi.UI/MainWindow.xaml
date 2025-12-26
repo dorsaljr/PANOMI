@@ -193,6 +193,30 @@
                                                       MinWidth="0" Padding="0"/>
                                         </Grid>
                                         
+                                        <Grid x:Name="StartupRow" Padding="4,6,4,6" 
+                                              Background="Transparent" PointerPressed="StartupRow_PointerPressed">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock x:Name="StartupText" Foreground="White" VerticalAlignment="Center"/>
+                                            <CheckBox x:Name="StartupToggle" Grid.Column="1" 
+                                                      Checked="StartupToggle_Changed" Unchecked="StartupToggle_Changed"
+                                                      MinWidth="0" Padding="0"/>
+                                        </Grid>
+                                        
+                                        <Grid x:Name="MinimizeToTrayRow" Padding="4,6,4,6" 
+                                              Background="Transparent" PointerPressed="MinimizeToTrayRow_PointerPressed">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock x:Name="MinimizeToTrayText" Foreground="White" VerticalAlignment="Center"/>
+                                            <CheckBox x:Name="MinimizeToTrayToggle" Grid.Column="1" 
+                                                      Checked="MinimizeToTrayToggle_Changed" Unchecked="MinimizeToTrayToggle_Changed"
+                                                      MinWidth="0" Padding="0"/>
+                                        </Grid>
+                                        
                                         <!-- Language Selector -->
                                         <Button x:Name="LanguageButton" 
                                                 HorizontalAlignment="Stretch" 

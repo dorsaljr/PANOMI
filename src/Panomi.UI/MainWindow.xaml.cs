@@ -12,6 +12,7 @@ using Panomi.Core.Services;
 using Panomi.UI.Helpers;
 using Panomi.UI.Services;
 using Windows.UI;
+using H.NotifyIcon;
 
 namespace Panomi.UI;
 
@@ -43,6 +44,11 @@ public sealed partial class MainWindow : Window
     
     // Track button currently showing "Launching..." for language updates
     private LibraryItem? _launchingButton = null;
+    
+    // Tray icon for minimize to tray feature
+    private TaskbarIcon? _trayIcon;
+    private bool _minimizeToTray = false;
+    private bool _isReallyClosing = false;
 
     public MainWindow()
     {
@@ -111,6 +117,12 @@ public sealed partial class MainWindow : Window
         ApplyLocalizedStrings();
         _ = LoadLibraryAsync();
         
+        // Initialize tray icon
+        InitializeTrayIcon();
+        
+        // Handle window close for minimize to tray
+        _appWindow.Closing += AppWindow_Closing;
+        
         // Check for updates and show button if available
         CheckForUpdateButton();
     }
@@ -147,6 +159,8 @@ public sealed partial class MainWindow : Window
         
         // Settings
         FullscreenText.Text = Loc.Get("FullscreenMode");
+        StartupText.Text = Loc.Get("StartWithWindows");
+        MinimizeToTrayText.Text = Loc.Get("MinimizeToTray");
         LanguageText.Text = Loc.Get("LanguageSetting");
         
         // Stats labels
@@ -183,6 +197,9 @@ public sealed partial class MainWindow : Window
                 {
                     _isLoadingSettings = true;
                     FullscreenToggle.IsChecked = settings.Fullscreen;
+                    StartupToggle.IsChecked = settings.StartWithWindows;
+                    MinimizeToTrayToggle.IsChecked = settings.MinimizeToTray;
+                    _minimizeToTray = settings.MinimizeToTray;
                     
                     // Set language
                     Loc.SetLanguage(settings.Language ?? "en-US");
@@ -206,6 +223,8 @@ public sealed partial class MainWindow : Window
             var settings = new AppSettings 
             { 
                 Fullscreen = _isFullscreen,
+                StartWithWindows = StartupToggle.IsChecked == true,
+                MinimizeToTray = _minimizeToTray,
                 Language = Loc.CurrentLanguage
             };
             var json = JsonSerializer.Serialize(settings);
@@ -402,6 +421,123 @@ public sealed partial class MainWindow : Window
         
         SetFullscreen(FullscreenToggle.IsChecked == true);
         SaveAppSettings();
+    }
+    
+    private void StartupRow_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        StartupToggle.IsChecked = !StartupToggle.IsChecked;
+        e.Handled = true;
+    }
+    
+    private void StartupToggle_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_isLoadingSettings) return;
+        
+        SetStartWithWindows(StartupToggle.IsChecked == true);
+        SaveAppSettings();
+    }
+    
+    private void SetStartWithWindows(bool enabled)
+    {
+        try
+        {
+            using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
+                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            
+            if (key == null) return;
+            
+            if (enabled)
+            {
+                var exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
+                if (!string.IsNullOrEmpty(exePath))
+                {
+                    key.SetValue("Panomi", $"\"{exePath}\"");
+                }
+            }
+            else
+            {
+                key.DeleteValue("Panomi", false);
+            }
+        }
+        catch { }
+    }
+    
+    private void MinimizeToTrayRow_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        MinimizeToTrayToggle.IsChecked = !MinimizeToTrayToggle.IsChecked;
+        e.Handled = true;
+    }
+    
+    private void MinimizeToTrayToggle_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_isLoadingSettings) return;
+        
+        _minimizeToTray = MinimizeToTrayToggle.IsChecked == true;
+        SaveAppSettings();
+    }
+    
+    private void InitializeTrayIcon()
+    {
+        var iconPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Assets", "logo_ico.ico");
+        
+        _trayIcon = new TaskbarIcon
+        {
+            IconSource = new BitmapImage(new Uri(iconPath))
+        };
+        
+        // Create context menu
+        var contextMenu = new MenuFlyout();
+        
+        var showItem = new MenuFlyoutItem { Text = "Show" };
+        showItem.Click += (s, e) => ShowFromTray();
+        contextMenu.Items.Add(showItem);
+        
+        var exitItem = new MenuFlyoutItem { Text = "Exit" };
+        exitItem.Click += (s, e) => ExitApplication();
+        contextMenu.Items.Add(exitItem);
+        
+        _trayIcon.ContextFlyout = contextMenu;
+        
+        // Double-click to show
+        _trayIcon.LeftClickCommand = new RelayCommand(ShowFromTray);
+    }
+    
+    private class RelayCommand : System.Windows.Input.ICommand
+    {
+        private readonly Action _execute;
+        public RelayCommand(Action execute) => _execute = execute;
+        public event EventHandler? CanExecuteChanged;
+        public bool CanExecute(object? parameter) => true;
+        public void Execute(object? parameter) => _execute();
+    }
+    
+    private void ShowFromTray()
+    {
+        // Show and activate window
+        _appWindow?.Show();
+        this.Activate();
+    }
+    
+    private void ExitApplication()
+    {
+        _isReallyClosing = true;
+        _trayIcon?.Dispose();
+        this.Close();
+    }
+    
+    private void AppWindow_Closing(Microsoft.UI.Windowing.AppWindow sender, Microsoft.UI.Windowing.AppWindowClosingEventArgs args)
+    {
+        if (_minimizeToTray && !_isReallyClosing)
+        {
+            // Cancel close and hide to tray instead
+            args.Cancel = true;
+            _appWindow?.Hide();
+        }
+        else
+        {
+            // Clean up tray icon on real close
+            _trayIcon?.Dispose();
+        }
     }
     
     // Discord and Spotify paths are cached for quick access
@@ -1369,5 +1505,7 @@ public enum FilterType
 public class AppSettings
 {
     public bool Fullscreen { get; set; }
+    public bool StartWithWindows { get; set; }
+    public bool MinimizeToTray { get; set; }
     public string Language { get; set; } = "en-US";
 }
