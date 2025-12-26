@@ -285,6 +285,15 @@ public sealed partial class MainWindow : Window
             };
             checkBox.Checked += LanguageCheckBox_Changed;
             checkBox.Unchecked += LanguageCheckBox_Changed;
+            // Add Enter key support (XYFocusKeyboardNavigation handles arrows)
+            checkBox.KeyDown += (s, e) =>
+            {
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    checkBox.IsChecked = !checkBox.IsChecked;
+                    e.Handled = true;
+                }
+            };
             Grid.SetColumn(checkBox, 1);
             row.Children.Add(checkBox);
             
@@ -424,6 +433,15 @@ public sealed partial class MainWindow : Window
         
         SetFullscreen(FullscreenToggle.IsChecked == true);
         SaveAppSettings();
+    }
+    
+    private void SettingsCheckbox_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == Windows.System.VirtualKey.Enter && sender is CheckBox checkbox)
+        {
+            checkbox.IsChecked = !checkbox.IsChecked;
+            e.Handled = true;
+        }
     }
     
     private void StartupRow_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -852,6 +870,15 @@ public sealed partial class MainWindow : Window
         };
         checkbox.Checked += LauncherCheckbox_Changed;
         checkbox.Unchecked += LauncherCheckbox_Changed;
+        // Add Enter key support (XYFocusKeyboardNavigation handles arrows)
+        checkbox.KeyDown += (s, e) =>
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                checkbox.IsChecked = !checkbox.IsChecked;
+                e.Handled = true;
+            }
+        };
         Grid.SetColumn(checkbox, 2);
         
         // Make entire row clickable
@@ -1351,6 +1378,9 @@ public sealed partial class MainWindow : Window
                 item.LaunchText = Loc.Get("LaunchButton");
                 button.Style = originalStyle;
                 button.IsEnabled = true;
+                
+                // Restore focus to the button
+                button.Focus(FocusState.Keyboard);
             }
         }
     }
@@ -1367,7 +1397,16 @@ public sealed partial class MainWindow : Window
                 _favorites.Remove(item.UniqueKey);
             
             SaveFavorites();
-            ApplyFilter(); // Re-sort with new favorite status
+            
+            // Only re-filter if showing favorites only and we're removing a favorite
+            // Otherwise just update the icon without losing focus
+            if (_showFavoritesOnly && !item.IsFavorite)
+            {
+                ApplyFilter();
+            }
+            
+            // Keep focus on the button
+            button.Focus(FocusState.Keyboard);
         }
     }
     

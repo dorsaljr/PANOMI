@@ -6,7 +6,7 @@
     xmlns:local="using:Panomi.UI"
     Title="">
 
-    <Grid Background="#000000">
+    <Grid Background="#000000" XYFocusKeyboardNavigation="Enabled">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="14"/>
@@ -18,7 +18,7 @@
                       HorizontalScrollBarVisibility="Disabled"
                       HorizontalContentAlignment="Stretch"
                       ViewChanged="MainScrollViewer_ViewChanged">
-            <Grid Margin="24,24,24,24" HorizontalAlignment="Stretch">
+            <Grid Margin="24,24,24,24" HorizontalAlignment="Stretch" XYFocusKeyboardNavigation="Enabled">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -67,23 +67,23 @@
                                                 <Setter Property="CornerRadius" Value="8"/>
                                             </Style>
                                         </Flyout.FlyoutPresenterStyle>
-                                        <StackPanel MinWidth="140" Spacing="2">
-                                            <Button Content="Nintendo" Click="WebLink_Click" Tag="https://www.nintendo.com" 
+                                        <StackPanel MinWidth="140" Spacing="2" XYFocusKeyboardNavigation="Enabled">
+                                            <Button x:Name="WebNintendo" Content="Nintendo" Click="WebLink_Click" Tag="https://www.nintendo.com" 
                                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                                                     Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button Content="PlayStation" Click="WebLink_Click" Tag="https://www.playstation.com" 
+                                            <Button x:Name="WebPlayStation" Content="PlayStation" Click="WebLink_Click" Tag="https://www.playstation.com" 
                                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                                                     Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button Content="Reddit" Click="WebLink_Click" Tag="https://www.reddit.com" 
+                                            <Button x:Name="WebReddit" Content="Reddit" Click="WebLink_Click" Tag="https://www.reddit.com" 
                                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                                                     Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button Content="Twitch" Click="WebLink_Click" Tag="https://www.twitch.tv" 
+                                            <Button x:Name="WebTwitch" Content="Twitch" Click="WebLink_Click" Tag="https://www.twitch.tv" 
                                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                                                     Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button Content="Xbox" Click="WebLink_Click" Tag="https://www.xbox.com" 
+                                            <Button x:Name="WebXbox" Content="Xbox" Click="WebLink_Click" Tag="https://www.xbox.com" 
                                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                                                     Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button Content="YouTube" Click="WebLink_Click" Tag="https://www.youtube.com" 
+                                            <Button x:Name="WebYouTube" Content="YouTube" Click="WebLink_Click" Tag="https://www.youtube.com" 
                                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
                                                     Background="Transparent" Foreground="White" Padding="12,8"/>
                                         </StackPanel>
@@ -157,7 +157,7 @@
                                             <Setter Property="CornerRadius" Value="8"/>
                                         </Style>
                                     </Flyout.FlyoutPresenterStyle>
-                                    <StackPanel x:Name="SourceFilterPanel" MinWidth="180" Spacing="4"/>
+                                    <StackPanel x:Name="SourceFilterPanel" MinWidth="180" Spacing="4" XYFocusKeyboardNavigation="Enabled"/>
                                 </Flyout>
                             </Button.Flyout>
                         </Button>
@@ -180,7 +180,7 @@
                                             <Setter Property="CornerRadius" Value="8"/>
                                         </Style>
                                     </Flyout.FlyoutPresenterStyle>
-                                    <StackPanel MinWidth="180" Spacing="4">
+                                    <StackPanel MinWidth="180" Spacing="4" XYFocusKeyboardNavigation="Enabled">
                                         <Grid x:Name="FullscreenRow" Padding="4,6,4,6" 
                                               Background="Transparent" PointerPressed="FullscreenRow_PointerPressed">
                                             <Grid.ColumnDefinitions>
@@ -190,6 +190,7 @@
                                             <TextBlock x:Name="FullscreenText" Foreground="White" VerticalAlignment="Center"/>
                                             <CheckBox x:Name="FullscreenToggle" Grid.Column="1" 
                                                       Checked="FullscreenToggle_Changed" Unchecked="FullscreenToggle_Changed"
+                                                      KeyDown="SettingsCheckbox_KeyDown"
                                                       MinWidth="0" Padding="0"/>
                                         </Grid>
                                         
@@ -202,6 +203,7 @@
                                             <TextBlock x:Name="StartupText" Foreground="White" VerticalAlignment="Center"/>
                                             <CheckBox x:Name="StartupToggle" Grid.Column="1" 
                                                       Checked="StartupToggle_Changed" Unchecked="StartupToggle_Changed"
+                                                      KeyDown="SettingsCheckbox_KeyDown"
                                                       MinWidth="0" Padding="0"/>
                                         </Grid>
                                         
@@ -214,6 +216,7 @@
                                             <TextBlock x:Name="MinimizeToTrayText" Foreground="White" VerticalAlignment="Center"/>
                                             <CheckBox x:Name="MinimizeToTrayToggle" Grid.Column="1" 
                                                       Checked="MinimizeToTrayToggle_Changed" Unchecked="MinimizeToTrayToggle_Changed"
+                                                      KeyDown="SettingsCheckbox_KeyDown"
                                                       MinWidth="0" Padding="0"/>
                                         </Grid>
                                         
@@ -239,7 +242,7 @@
                                                             <Setter Property="CornerRadius" Value="8"/>
                                                         </Style>
                                                     </Flyout.FlyoutPresenterStyle>
-                                                    <StackPanel x:Name="LanguagePanel" MinWidth="120" Spacing="2"/>
+                                                    <StackPanel x:Name="LanguagePanel" MinWidth="120" Spacing="2" XYFocusKeyboardNavigation="Enabled"/>
                                                 </Flyout>
                                             </Button.Flyout>
                                         </Button>
