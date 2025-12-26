@@ -1,0 +1,36 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+ARM64/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Build outputs
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# Publish output
+publish/

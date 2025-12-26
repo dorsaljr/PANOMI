@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Panomi.UI.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Panomi.UI.Views"
+    Background="Transparent">
+
+    <StackPanel Spacing="16" Padding="0,0,20,20" MinWidth="300">
+        <!-- Header -->
+        <TextBlock 
+            Text="Settings" 
+            FontSize="20"
+            FontWeight="SemiBold"
+            Foreground="White"
+            Margin="0,0,0,8"/>
+
+        <TextBlock 
+            Text="Coming soon..." 
+            Foreground="#888"
+            FontSize="14"/>
+    </StackPanel>
+</Page>
