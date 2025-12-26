@@ -117,8 +117,11 @@ public sealed partial class MainWindow : Window
         ApplyLocalizedStrings();
         _ = LoadLibraryAsync();
         
-        // Initialize tray icon
-        InitializeTrayIcon();
+        // Initialize tray icon only if setting is enabled
+        if (_minimizeToTray)
+        {
+            InitializeTrayIcon();
+        }
         
         // Handle window close for minimize to tray
         _appWindow.Closing += AppWindow_Closing;
@@ -473,6 +476,21 @@ public sealed partial class MainWindow : Window
         if (_isLoadingSettings) return;
         
         _minimizeToTray = MinimizeToTrayToggle.IsChecked == true;
+        
+        // Create or dispose tray icon based on setting
+        if (_minimizeToTray)
+        {
+            if (_trayIcon == null)
+            {
+                InitializeTrayIcon();
+            }
+        }
+        else
+        {
+            _trayIcon?.Dispose();
+            _trayIcon = null;
+        }
+        
         SaveAppSettings();
     }
     
