@@ -43,6 +43,30 @@
             <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundChecked" Color="Black"/>
             <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPointerOver" Color="Black"/>
             
+            <!-- MenuFlyout dark theme overrides -->
+            <SolidColorBrush x:Key="MenuFlyoutItemForeground" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutItemForegroundPointerOver" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutItemForegroundPressed" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutItemForegroundDisabled" Color="#666666"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemChevron" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemChevronPointerOver" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemChevronPressed" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemChevronSubMenuOpened" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutItemBackground" Color="Transparent"/>
+            <SolidColorBrush x:Key="MenuFlyoutItemBackgroundPointerOver" Color="#2a2a2f"/>
+            <SolidColorBrush x:Key="MenuFlyoutItemBackgroundPressed" Color="#3a3a3f"/>
+            <SolidColorBrush x:Key="MenuFlyoutPresenterBackground" Color="#0f1114"/>
+            <SolidColorBrush x:Key="MenuFlyoutPresenterBorderBrush" Color="#2a2a2f"/>
+            <!-- MenuFlyoutSubItem specific overrides -->
+            <SolidColorBrush x:Key="MenuFlyoutSubItemForeground" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemForegroundPointerOver" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemForegroundPressed" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemForegroundSubMenuOpened" Color="White"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemBackground" Color="Transparent"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemBackgroundPointerOver" Color="#2a2a2f"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemBackgroundPressed" Color="#3a3a3f"/>
+            <SolidColorBrush x:Key="MenuFlyoutSubItemBackgroundSubMenuOpened" Color="#2a2a2f"/>
+            
             <!-- Deep Blue Pill Button Style for active filter tabs -->
             <Style x:Key="CyanPillButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="#0A192F"/>

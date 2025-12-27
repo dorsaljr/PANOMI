@@ -432,6 +432,67 @@ public class GameService : IGameService
         }
         
         await context.SaveChangesAsync();
+        
+        // Deduplicate games that have the same executable path across different launchers
+        // This handles cases like RDR2 (Steam + Rockstar) or R6 Siege (Steam + Ubisoft)
+        await DeduplicateGamesByExecutableAsync();
+    }
+    
+    /// <summary>
+    /// Removes duplicate games that share the same executable path across launchers.
+    /// Prefers Steam version when duplicates are found, otherwise keeps first detected.
+    /// </summary>
+    private async Task DeduplicateGamesByExecutableAsync()
+    {
+        using var context = await _contextFactory.CreateDbContextAsync();
+        
+        // Get all games with their launcher info
+        var allGames = await context.Games
+            .Include(g => g.Launcher)
+            .Where(g => !string.IsNullOrEmpty(g.ExecutablePath))
+            .ToListAsync();
+        
+        // Group by normalized executable path (case-insensitive)
+        var duplicateGroups = allGames
+            .GroupBy(g => g.ExecutablePath!.ToLowerInvariant().Trim())
+            .Where(group => group.Count() > 1)
+            .ToList();
+        
+        if (duplicateGroups.Count == 0)
+        {
+            System.Diagnostics.Debug.WriteLine("[Dedupe] No duplicate games found");
+            return;
+        }
+        
+        var gamesToRemove = new List<Game>();
+        
+        foreach (var group in duplicateGroups)
+        {
+            var games = group.ToList();
+            
+            // Prefer Steam, otherwise keep first detected (by DateAdded)
+            var steamGame = games.FirstOrDefault(g => g.Launcher?.Type == LauncherType.Steam);
+            var gameToKeep = steamGame ?? games.OrderBy(g => g.DateAdded).First();
+            
+            // Mark all others for removal
+            var duplicates = games.Where(g => g.Id != gameToKeep.Id).ToList();
+            
+            System.Diagnostics.Debug.WriteLine($"[Dedupe] Found {games.Count} entries for '{gameToKeep.Name}'");
+            System.Diagnostics.Debug.WriteLine($"[Dedupe] - Keeping: {gameToKeep.Launcher?.Name} version");
+            foreach (var dupe in duplicates)
+            {
+                System.Diagnostics.Debug.WriteLine($"[Dedupe] - Removing: {dupe.Launcher?.Name} version");
+            }
+            
+            gamesToRemove.AddRange(duplicates);
+        }
+        
+        if (gamesToRemove.Count > 0)
+        {
+            context.Games.RemoveRange(gamesToRemove);
+            await context.SaveChangesAsync();
+            System.Diagnostics.Debug.WriteLine($"[Dedupe] Removed {gamesToRemove.Count} duplicate game(s)");
+        }
     }
 
     /// <summary>

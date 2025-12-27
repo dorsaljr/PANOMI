@@ -51,43 +51,95 @@
                                     Style="{StaticResource DarkRectButtonStyle}">
                                 <Image x:Name="DiscordIcon" Width="24" Height="24"/>
                             </Button>
-                            <Button x:Name="WebLinksButton"
+                            <Button x:Name="AILinksButton"
                                     Width="44" Height="44" Padding="0" CornerRadius="10"
                                     Style="{StaticResource DarkRectButtonStyle}"
-                                    ToolTipService.ToolTip="Web Links">
-                                <FontIcon Glyph="&#xE774;" FontSize="20" Foreground="White"/>
+                                    ToolTipService.ToolTip="AI Tools">
+                                <TextBlock Text="AI" FontSize="16" FontWeight="Bold" Foreground="White"/>
                                 <Button.Flyout>
-                                    <Flyout Placement="BottomEdgeAlignedLeft">
-                                        <Flyout.FlyoutPresenterStyle>
-                                            <Style TargetType="FlyoutPresenter">
+                                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                        <MenuFlyout.MenuFlyoutPresenterStyle>
+                                            <Style TargetType="MenuFlyoutPresenter">
                                                 <Setter Property="Background" Value="#0f1114"/>
                                                 <Setter Property="BorderBrush" Value="#2a2a2f"/>
                                                 <Setter Property="BorderThickness" Value="1"/>
                                                 <Setter Property="Padding" Value="4"/>
                                                 <Setter Property="CornerRadius" Value="8"/>
                                             </Style>
-                                        </Flyout.FlyoutPresenterStyle>
-                                        <StackPanel MinWidth="140" Spacing="2" XYFocusKeyboardNavigation="Enabled">
-                                            <Button x:Name="WebNintendo" Content="Nintendo" Click="WebLink_Click" Tag="https://www.nintendo.com" 
-                                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                                    Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button x:Name="WebPlayStation" Content="PlayStation" Click="WebLink_Click" Tag="https://www.playstation.com" 
-                                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                                    Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button x:Name="WebReddit" Content="Reddit" Click="WebLink_Click" Tag="https://www.reddit.com" 
-                                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                                    Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button x:Name="WebTwitch" Content="Twitch" Click="WebLink_Click" Tag="https://www.twitch.tv" 
-                                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                                    Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button x:Name="WebXbox" Content="Xbox" Click="WebLink_Click" Tag="https://www.xbox.com" 
-                                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                                    Background="Transparent" Foreground="White" Padding="12,8"/>
-                                            <Button x:Name="WebYouTube" Content="YouTube" Click="WebLink_Click" Tag="https://www.youtube.com" 
-                                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                                    Background="Transparent" Foreground="White" Padding="12,8"/>
-                                        </StackPanel>
-                                    </Flyout>
+                                        </MenuFlyout.MenuFlyoutPresenterStyle>
+                                        <MenuFlyoutItem x:Name="AIChatGPT" Text="ChatGPT" Click="WebLink_Click" Tag="https://chat.openai.com" Foreground="White"/>
+                                        <MenuFlyoutItem x:Name="AIClaude" Text="Claude" Click="WebLink_Click" Tag="https://claude.ai" Foreground="White"/>
+                                        <MenuFlyoutItem x:Name="AIDeepSeek" Text="DeepSeek" Click="WebLink_Click" Tag="https://chat.deepseek.com" Foreground="White"/>
+                                        <MenuFlyoutItem x:Name="AIGemini" Text="Gemini" Click="WebLink_Click" Tag="https://gemini.google.com" Foreground="White"/>
+                                        <MenuFlyoutItem x:Name="AIGrok" Text="Grok" Click="WebLink_Click" Tag="https://grok.x.ai" Foreground="White"/>
+                                        <MenuFlyoutItem x:Name="AIMetaAI" Text="Meta AI" Click="WebLink_Click" Tag="https://meta.ai" Foreground="White"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                            <Button x:Name="WebLinksButton"
+                                    Width="44" Height="44" Padding="0" CornerRadius="10"
+                                    Style="{StaticResource DarkRectButtonStyle}"
+                                    ToolTipService.ToolTip="Web Links">
+                                <FontIcon Glyph="&#xE774;" FontSize="20" Foreground="White"/>
+                                <Button.Flyout>
+                                    <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                        <MenuFlyout.MenuFlyoutPresenterStyle>
+                                            <Style TargetType="MenuFlyoutPresenter">
+                                                <Setter Property="Background" Value="#0f1114"/>
+                                                <Setter Property="BorderBrush" Value="#2a2a2f"/>
+                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="Padding" Value="4"/>
+                                                <Setter Property="CornerRadius" Value="8"/>
+                                            </Style>
+                                        </MenuFlyout.MenuFlyoutPresenterStyle>
+                                        
+                                        <!-- Console (alphabetical) -->
+                                        <MenuFlyoutSubItem x:Name="WebConsoleMenu" Text="Console" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebNintendo" Text="Nintendo" Click="WebLink_Click" Tag="https://www.nintendo.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebPlayStation" Text="PlayStation" Click="WebLink_Click" Tag="https://www.playstation.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebXbox" Text="Xbox" Click="WebLink_Click" Tag="https://www.xbox.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                        <!-- Live Streaming (alphabetical) -->
+                                        <MenuFlyoutSubItem x:Name="WebLiveStreamingMenu" Text="Live Streaming" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebKick" Text="Kick" Click="WebLink_Click" Tag="https://www.kick.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebRumble" Text="Rumble" Click="WebLink_Click" Tag="https://www.rumble.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebTwitch" Text="Twitch" Click="WebLink_Click" Tag="https://www.twitch.tv" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                        <!-- Misc (alphabetical) -->
+                                        <MenuFlyoutSubItem x:Name="WebMiscMenu" Text="Misc" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebAmazonStore" Text="Amazon" Click="WebLink_Click" Tag="https://www.amazon.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebGitHub" Text="GitHub" Click="WebLink_Click" Tag="https://www.github.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebGoogle" Text="Google" Click="WebLink_Click" Tag="https://www.google.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebWikipedia" Text="Wikipedia" Click="WebLink_Click" Tag="https://www.wikipedia.org" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                        <!-- PC (alphabetical) -->
+                                        <MenuFlyoutSubItem x:Name="WebPCMenu" Text="PC" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebPCPartPicker" Text="PCPartPicker" Click="WebLink_Click" Tag="https://pcpartpicker.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                        <!-- Social Media (alphabetical) -->
+                                        <MenuFlyoutSubItem x:Name="WebSocialMediaMenu" Text="Social Media" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebFacebook" Text="Facebook" Click="WebLink_Click" Tag="https://www.facebook.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebInstagram" Text="Instagram" Click="WebLink_Click" Tag="https://www.instagram.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebReddit" Text="Reddit" Click="WebLink_Click" Tag="https://www.reddit.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebTikTok" Text="TikTok" Click="WebLink_Click" Tag="https://www.tiktok.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebWhatsApp" Text="WhatsApp" Click="WebLink_Click" Tag="https://web.whatsapp.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebX" Text="X" Click="WebLink_Click" Tag="https://www.x.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebYouTube" Text="YouTube" Click="WebLink_Click" Tag="https://www.youtube.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                        <!-- TV Streaming (alphabetical) -->
+                                        <MenuFlyoutSubItem x:Name="WebTVStreamingMenu" Text="TV Streaming" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebAmazonPrime" Text="Amazon Prime" Click="WebLink_Click" Tag="https://www.primevideo.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebAppleTV" Text="Apple TV+" Click="WebLink_Click" Tag="https://tv.apple.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebDisneyPlus" Text="Disney+" Click="WebLink_Click" Tag="https://www.disneyplus.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebNetflix" Text="Netflix" Click="WebLink_Click" Tag="https://www.netflix.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                    </MenuFlyout>
                                 </Button.Flyout>
                             </Button>
                             <Button x:Name="UpdateButton" Click="UpdateButton_Click"

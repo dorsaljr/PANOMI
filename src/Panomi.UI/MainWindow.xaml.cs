@@ -1100,7 +1100,18 @@ public sealed partial class MainWindow : Window
 
     private void WebLink_Click(object sender, RoutedEventArgs e)
     {
-        if (sender is Button button && button.Tag is string url)
+        string? url = null;
+        
+        if (sender is Button button && button.Tag is string buttonUrl)
+        {
+            url = buttonUrl;
+        }
+        else if (sender is MenuFlyoutItem menuItem && menuItem.Tag is string menuUrl)
+        {
+            url = menuUrl;
+        }
+        
+        if (!string.IsNullOrEmpty(url))
         {
             try
             {
@@ -1114,6 +1125,23 @@ public sealed partial class MainWindow : Window
             {
                 // Silently fail
             }
+        }
+    }
+    
+    private void OpenDefaultBrowser_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Opens the user's default browser to their homepage
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "about:blank",
+                UseShellExecute = true
+            });
+        }
+        catch
+        {
+            // Silently fail
         }
     }
     
