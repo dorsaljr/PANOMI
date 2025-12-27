@@ -470,9 +470,9 @@ public class GameService : IGameService
         {
             var games = group.ToList();
             
-            // Prefer Steam, otherwise keep first detected (by DateAdded)
+            // Priority: 1. Steam wins, 2. Newest DateAdded (freshest detection)
             var steamGame = games.FirstOrDefault(g => g.Launcher?.Type == LauncherType.Steam);
-            var gameToKeep = steamGame ?? games.OrderBy(g => g.DateAdded).First();
+            var gameToKeep = steamGame ?? games.OrderByDescending(g => g.DateAdded).First();
             
             // Mark all others for removal
             var duplicates = games.Where(g => g.Id != gameToKeep.Id).ToList();

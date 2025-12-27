@@ -260,7 +260,13 @@
                                         </Grid>
                                         
                                         <Grid x:Name="MinimizeToTrayRow" Padding="4,6,4,6" 
-                                              Background="Transparent" PointerPressed="MinimizeToTrayRow_PointerPressed">
+                                              Background="Transparent" PointerPressed="MinimizeToTrayRow_PointerPressed"
+                                              ToolTipService.Placement="Left">
+                                            <ToolTipService.ToolTip>
+                                                <ToolTip x:Name="QuickLaunchTooltip">
+                                                    <TextBlock x:Name="QuickLaunchInfoText" Foreground="#888" FontSize="12" MaxWidth="250" TextWrapping="Wrap"/>
+                                                </ToolTip>
+                                            </ToolTipService.ToolTip>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>

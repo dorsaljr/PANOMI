@@ -85,6 +85,7 @@
                             <TextBlock 
                                 Text="{Binding Name}" 
                                 Style="{StaticResource BodyStrongTextBlockStyle}"
+                                TextWrapping="Wrap"
                                 TextTrimming="CharacterEllipsis"
                                 MaxLines="2"/>
                             <TextBlock 

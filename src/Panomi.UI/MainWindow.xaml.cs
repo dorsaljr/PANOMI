@@ -1,6 +1,7 @@
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -47,7 +48,7 @@ public sealed partial class MainWindow : Window
     
     // Tray icon for minimize to tray feature
     private TaskbarIcon? _trayIcon;
-    private bool _minimizeToTray = false;
+    private bool _minimizeToTray = true;  // Default ON for better first impression
     private bool _isReallyClosing = false;
 
     public MainWindow()
@@ -164,6 +165,7 @@ public sealed partial class MainWindow : Window
         FullscreenText.Text = Loc.Get("FullscreenMode");
         StartupText.Text = Loc.Get("StartWithWindows");
         MinimizeToTrayText.Text = Loc.Get("MinimizeToTray");
+        QuickLaunchInfoText.Text = Loc.Get("QuickLaunchInfo");
         LanguageText.Text = Loc.Get("LanguageSetting");
         
         // Stats labels
