@@ -33,7 +33,14 @@ public static class Loc
             ["StatTotal"] = "Total",
             ["StatLaunchers"] = "Launchers",
             ["StatGames"] = "Games",
-            ["UpdateAvailable"] = "Update Available"
+            ["UpdateAvailable"] = "Update Available",
+            ["WebConsole"] = "Console",
+            ["WebLiveStreaming"] = "Live Streaming",
+            ["WebMisc"] = "Misc",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "Social Media",
+            ["WebTVStreaming"] = "TV Streaming",
+            ["WebSupport"] = "Support"
         },
         ["es"] = new()
         {
@@ -56,7 +63,14 @@ public static class Loc
             ["LanguageSetting"] = "Idioma",
             ["StatTotal"] = "Total",
             ["StatLaunchers"] = "Launchers",
-            ["StatGames"] = "Juegos"
+            ["StatGames"] = "Juegos",
+            ["WebConsole"] = "Consola",
+            ["WebLiveStreaming"] = "Streaming en Vivo",
+            ["WebMisc"] = "Varios",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "Redes Sociales",
+            ["WebTVStreaming"] = "Streaming de TV",
+            ["WebSupport"] = "Soporte"
         },
         ["pt-BR"] = new()
         {
@@ -79,7 +93,14 @@ public static class Loc
             ["LanguageSetting"] = "Idioma",
             ["StatTotal"] = "Total",
             ["StatLaunchers"] = "Launchers",
-            ["StatGames"] = "Jogos"
+            ["StatGames"] = "Jogos",
+            ["WebConsole"] = "Console",
+            ["WebLiveStreaming"] = "Transmissão ao Vivo",
+            ["WebMisc"] = "Diversos",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "Redes Sociais",
+            ["WebTVStreaming"] = "Streaming de TV",
+            ["WebSupport"] = "Suporte"
         },
         ["fr"] = new()
         {
@@ -102,7 +123,14 @@ public static class Loc
             ["LanguageSetting"] = "Langue",
             ["StatTotal"] = "Total",
             ["StatLaunchers"] = "Launchers",
-            ["StatGames"] = "Jeux"
+            ["StatGames"] = "Jeux",
+            ["WebConsole"] = "Console",
+            ["WebLiveStreaming"] = "Streaming en Direct",
+            ["WebMisc"] = "Divers",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "Réseaux Sociaux",
+            ["WebTVStreaming"] = "Streaming TV",
+            ["WebSupport"] = "Support"
         },
         ["de"] = new()
         {
@@ -125,7 +153,14 @@ public static class Loc
             ["LanguageSetting"] = "Sprache",
             ["StatTotal"] = "Gesamt",
             ["StatLaunchers"] = "Launcher",
-            ["StatGames"] = "Spiele"
+            ["StatGames"] = "Spiele",
+            ["WebConsole"] = "Konsole",
+            ["WebLiveStreaming"] = "Live-Streaming",
+            ["WebMisc"] = "Sonstiges",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "Soziale Medien",
+            ["WebTVStreaming"] = "TV-Streaming",
+            ["WebSupport"] = "Support"
         },
         ["it"] = new()
         {
@@ -148,7 +183,14 @@ public static class Loc
             ["LanguageSetting"] = "Lingua",
             ["StatTotal"] = "Totale",
             ["StatLaunchers"] = "Launcher",
-            ["StatGames"] = "Giochi"
+            ["StatGames"] = "Giochi",
+            ["WebConsole"] = "Console",
+            ["WebLiveStreaming"] = "Streaming Live",
+            ["WebMisc"] = "Varie",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "Social Media",
+            ["WebTVStreaming"] = "Streaming TV",
+            ["WebSupport"] = "Supporto"
         },
         ["ko"] = new()
         {
@@ -171,7 +213,14 @@ public static class Loc
             ["LanguageSetting"] = "언어",
             ["StatTotal"] = "전체",
             ["StatLaunchers"] = "런처",
-            ["StatGames"] = "게임"
+            ["StatGames"] = "게임",
+            ["WebConsole"] = "콘솔",
+            ["WebLiveStreaming"] = "라이브 스트리밍",
+            ["WebMisc"] = "기타",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "소셜 미디어",
+            ["WebTVStreaming"] = "TV 스트리밍",
+            ["WebSupport"] = "지원"
         },
         ["ja"] = new()
         {
@@ -194,7 +243,14 @@ public static class Loc
             ["LanguageSetting"] = "言語",
             ["StatTotal"] = "合計",
             ["StatLaunchers"] = "ランチャー",
-            ["StatGames"] = "ゲーム"
+            ["StatGames"] = "ゲーム",
+            ["WebConsole"] = "コンソール",
+            ["WebLiveStreaming"] = "ライブ配信",
+            ["WebMisc"] = "その他",
+            ["WebPC"] = "PC",
+            ["WebSocialMedia"] = "ソーシャルメディア",
+            ["WebTVStreaming"] = "動画配信",
+            ["WebSupport"] = "サポート"
         },
         ["zh-CN"] = new()
         {
@@ -217,7 +273,14 @@ public static class Loc
             ["LanguageSetting"] = "语言",
             ["StatTotal"] = "总计",
             ["StatLaunchers"] = "启动器",
-            ["StatGames"] = "游戏"
+            ["StatGames"] = "游戏",
+            ["WebConsole"] = "主机",
+            ["WebLiveStreaming"] = "直播",
+            ["WebMisc"] = "其他",
+            ["WebPC"] = "电脑",
+            ["WebSocialMedia"] = "社交媒体",
+            ["WebTVStreaming"] = "视频流媒体",
+            ["WebSupport"] = "支持"
         },
         ["hi"] = new()
         {
@@ -240,7 +303,14 @@ public static class Loc
             ["LanguageSetting"] = "भाषा",
             ["StatTotal"] = "कुल",
             ["StatLaunchers"] = "लॉन्चर",
-            ["StatGames"] = "गेम्स"
+            ["StatGames"] = "गेम्स",
+            ["WebConsole"] = "कंसोल",
+            ["WebLiveStreaming"] = "लाइव स्ट्रीमिंग",
+            ["WebMisc"] = "विविध",
+            ["WebPC"] = "पीसी",
+            ["WebSocialMedia"] = "सोशल मीडिया",
+            ["WebTVStreaming"] = "टीवी स्ट्रीमिंग",
+            ["WebSupport"] = "सहायता"
         }
     };
     

@@ -139,6 +139,11 @@
                                             <MenuFlyoutItem x:Name="WebNetflix" Text="Netflix" Click="WebLink_Click" Tag="https://www.netflix.com" Foreground="White"/>
                                         </MenuFlyoutSubItem>
                                         
+                                        <!-- Support -->
+                                        <MenuFlyoutSubItem x:Name="WebSupportMenu" Text="Support" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebLinktree" Text="Linktree" Click="WebLink_Click" Tag="https://linktr.ee/panomiltd" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
                                     </MenuFlyout>
                                 </Button.Flyout>
                             </Button>

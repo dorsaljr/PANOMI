@@ -176,6 +176,15 @@ public sealed partial class MainWindow : Window
         // Library header
         LibraryHeader.Text = Loc.Get("Library");
         
+        // Web menu categories
+        WebConsoleMenu.Text = Loc.Get("WebConsole");
+        WebLiveStreamingMenu.Text = Loc.Get("WebLiveStreaming");
+        WebMiscMenu.Text = Loc.Get("WebMisc");
+        WebPCMenu.Text = Loc.Get("WebPC");
+        WebSocialMediaMenu.Text = Loc.Get("WebSocialMedia");
+        WebTVStreamingMenu.Text = Loc.Get("WebTVStreaming");
+        WebSupportMenu.Text = Loc.Get("WebSupport");
+        
         // Update Launch button text on all items
         var launchText = Loc.Get("LaunchButton");
         foreach (var item in _allItems)
