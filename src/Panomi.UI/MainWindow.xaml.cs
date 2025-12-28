@@ -1360,6 +1360,9 @@ public sealed partial class MainWindow : Window
         
         ApplyFilter();
         SaveFilterSettings();
+        
+        // Scroll to top when changing tabs
+        MainScrollViewer.ScrollToVerticalOffset(0);
     }
 
     private async void LaunchItem_Click(object sender, RoutedEventArgs e)
@@ -1429,6 +1432,7 @@ public sealed partial class MainWindow : Window
     {
         if (sender is Button button && button.Tag is LibraryItem item)
         {
+            var wasFavorite = item.IsFavorite;
             item.IsFavorite = !item.IsFavorite;
             
             if (item.IsFavorite)
@@ -1438,18 +1442,67 @@ public sealed partial class MainWindow : Window
             
             SaveFavorites();
             
-            // Only re-filter if showing favorites only and we're removing a favorite
-            // Otherwise just update the icon without losing focus
-            if (_showFavoritesOnly && !item.IsFavorite)
+            var oldIndex = _filteredItems.IndexOf(item);
+            if (oldIndex >= 0)
             {
-                ApplyFilter();
+                int newIndex;
+                
+                if (item.IsFavorite)
+                {
+                    // Moving up to favorites section
+                    newIndex = 0;
+                    for (int i = 0; i < _filteredItems.Count; i++)
+                    {
+                        if (i == oldIndex) continue;
+                        var other = _filteredItems[i];
+                        if (!other.IsFavorite) break;
+                        if (item.IsLauncher && !other.IsLauncher) break;
+                        if (!item.IsLauncher && other.IsLauncher) { newIndex = i + 1; continue; }
+                        if (string.Compare(item.Name, other.Name, StringComparison.OrdinalIgnoreCase) > 0)
+                            newIndex = i + 1;
+                        else
+                            break;
+                    }
+                }
+                else
+                {
+                    // Moving down to non-favorites section
+                    newIndex = 0;
+                    for (int i = 0; i < _filteredItems.Count; i++)
+                    {
+                        if (i == oldIndex) continue;
+                        var other = _filteredItems[i];
+                        if (other.IsFavorite) { newIndex = i + 1; continue; } // Skip all favorites
+                        if (item.IsLauncher && !other.IsLauncher) break;
+                        if (!item.IsLauncher && other.IsLauncher) { newIndex = i + 1; continue; }
+                        if (string.Compare(item.Name, other.Name, StringComparison.OrdinalIgnoreCase) > 0)
+                            newIndex = i + 1;
+                        else
+                            break;
+                    }
+                }
+                
+                if (newIndex > oldIndex) newIndex--;
+                if (newIndex != oldIndex && newIndex >= 0 && newIndex < _filteredItems.Count)
+                {
+                    if (!item.IsFavorite)
+                    {
+                        // Unfavoriting: save scroll, move, force layout, restore
+                        var scrollBefore = MainScrollViewer.VerticalOffset;
+                        _filteredItems.Move(oldIndex, newIndex);
+                        MainScrollViewer.UpdateLayout();
+                        MainScrollViewer.ScrollToVerticalOffset(scrollBefore);
+                    }
+                    else
+                    {
+                        // Favoriting: just move (goes up, no scroll issue)
+                        _filteredItems.Move(oldIndex, newIndex);
+                    }
+                }
             }
-            
-            // Keep focus on the button
-            button.Focus(FocusState.Keyboard);
         }
     }
-    
+
     private void LoadFavorites()
     {
         try
