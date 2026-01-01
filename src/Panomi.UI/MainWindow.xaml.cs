@@ -430,6 +430,17 @@ public sealed partial class MainWindow : Window
             SaveAppSettings();
             e.Handled = true;
         }
+        
+        // Ctrl+W to close window
+        if (e.Key == Windows.System.VirtualKey.W)
+        {
+            var ctrlState = Microsoft.UI.Input.InputKeyboardSource.GetKeyStateForCurrentThread(Windows.System.VirtualKey.Control);
+            if (ctrlState.HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down))
+            {
+                Close();
+                e.Handled = true;
+            }
+        }
     }
     
     private void FullscreenRow_PointerPressed(object sender, PointerRoutedEventArgs e)

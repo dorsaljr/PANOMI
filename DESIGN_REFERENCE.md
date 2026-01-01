@@ -83,14 +83,6 @@ Reference image from user's early concept - this is the target design to match.
   - Font weight: SemiBold
   - Max 2 lines, wrap
 
-- **Launch Button** (bottom, full width):
-  - Gradient background (teal → cyan → magenta)
-  - Text: "Launch", dark color `#0D0D0F`
-  - Font weight: SemiBold
-  - Border radius: ~10px
-  - Padding: ~10px vertical
-  - Margin: ~12px from card edges
-
 ---
 
 ## Typography
@@ -108,7 +100,7 @@ Reference image from user's early concept - this is the target design to match.
 
 ## Key Design Notes
 
-1. **No colorful gradients on cards** - cards are solid dark, only the Launch button has gradient
+1. **No colorful gradients on cards** - cards are solid dark
 2. **Minimal borders** - clean, borderless look except search box
 3. **Consistent rounded corners** - softer UI feel
 4. **High contrast** - white text on dark backgrounds
