@@ -40,7 +40,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "Social Media",
             ["WebTVStreaming"] = "TV Streaming",
-            ["WebSupport"] = "Support"
+            ["WebSupport"] = "Support PANOMI"
         },
         ["es"] = new()
         {
@@ -70,7 +70,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "Redes Sociales",
             ["WebTVStreaming"] = "Streaming de TV",
-            ["WebSupport"] = "Soporte"
+            ["WebSupport"] = "Apoyar a PANOMI"
         },
         ["pt-BR"] = new()
         {
@@ -100,7 +100,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "Redes Sociais",
             ["WebTVStreaming"] = "Streaming de TV",
-            ["WebSupport"] = "Suporte"
+            ["WebSupport"] = "Apoiar PANOMI"
         },
         ["fr"] = new()
         {
@@ -130,7 +130,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "Réseaux Sociaux",
             ["WebTVStreaming"] = "Streaming TV",
-            ["WebSupport"] = "Support"
+            ["WebSupport"] = "Soutenir PANOMI"
         },
         ["de"] = new()
         {
@@ -160,7 +160,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "Soziale Medien",
             ["WebTVStreaming"] = "TV-Streaming",
-            ["WebSupport"] = "Support"
+            ["WebSupport"] = "PANOMI unterstützen"
         },
         ["it"] = new()
         {
@@ -190,7 +190,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "Social Media",
             ["WebTVStreaming"] = "Streaming TV",
-            ["WebSupport"] = "Supporto"
+            ["WebSupport"] = "Supporta PANOMI"
         },
         ["ko"] = new()
         {
@@ -220,7 +220,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "소셜 미디어",
             ["WebTVStreaming"] = "TV 스트리밍",
-            ["WebSupport"] = "지원"
+            ["WebSupport"] = "PANOMI 후원"
         },
         ["ja"] = new()
         {
@@ -250,7 +250,7 @@ public static class Loc
             ["WebPC"] = "PC",
             ["WebSocialMedia"] = "ソーシャルメディア",
             ["WebTVStreaming"] = "動画配信",
-            ["WebSupport"] = "サポート"
+            ["WebSupport"] = "PANOMIを支援"
         },
         ["zh-CN"] = new()
         {
@@ -280,7 +280,7 @@ public static class Loc
             ["WebPC"] = "电脑",
             ["WebSocialMedia"] = "社交媒体",
             ["WebTVStreaming"] = "视频流媒体",
-            ["WebSupport"] = "支持"
+            ["WebSupport"] = "支持PANOMI"
         },
         ["hi"] = new()
         {
@@ -310,7 +310,7 @@ public static class Loc
             ["WebPC"] = "पीसी",
             ["WebSocialMedia"] = "सोशल मीडिया",
             ["WebTVStreaming"] = "टीवी स्ट्रीमिंग",
-            ["WebSupport"] = "सहायता"
+            ["WebSupport"] = "PANOMI का समर्थन करें"
         }
     };
     

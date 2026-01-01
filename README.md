@@ -1,0 +1,76 @@
+# PANOMI
+
+**One launcher for all your games.**
+
+PANOMI automatically detects your installed game launchers and games, giving you a unified library to browse and launch everything from one place.
+
+![PANOMI Screenshot](docs/screenshot.png)
+
+## Features
+
+- 🎮 **Auto-detection** - Finds Steam, Epic Games, GOG Galaxy, EA App, Ubisoft Connect, Battle.net, Riot Games, Rockstar Games, Minecraft, and Roblox
+- 🚀 **Quick Launch** - Minimize to tray for instant access
+- 🌍 **10 Languages** - English, Spanish, Portuguese, French, German, Italian, Korean, Japanese, Chinese, Hindi
+- 🖥️ **Fullscreen Mode** - Controller-friendly big picture experience
+- 🔄 **Auto-updates** - Seamless updates via Velopack
+
+## Privacy
+
+- ✅ **No telemetry** - Zero data collection
+- ✅ **No accounts** - Works completely offline
+- ✅ **Local only** - All data stays on your PC
+- ✅ **Open source** - Audit the code yourself
+
+## How It Works
+
+PANOMI reads Windows registry entries and launcher configuration files to detect installed games. It does not modify any files or settings - it only reads existing data.
+
+**Detection sources:**
+- Registry keys (HKLM/HKCU software entries)
+- Steam `.acf` manifests
+- Epic Games `.item` manifests
+- GOG Galaxy database
+- EA App/Ubisoft Connect local configs
+
+## System Requirements
+
+- Windows 11 (x64)
+- .NET 8 Runtime (included in installer)
+
+## Building from Source
+
+```powershell
+# Clone
+git clone https://github.com/dorsaljr/PANOMI_BETA.git
+cd PANOMI_BETA
+
+# Build
+dotnet build src/Panomi.UI/Panomi.UI.csproj -c Release -p:Platform=x64
+
+# Run
+.\src\Panomi.UI\bin\x64\Release\net8.0-windows10.0.19041.0\Panomi.UI.exe
+```
+
+## Project Structure
+
+```
+src/
+├── Panomi.Core/        # Models, interfaces
+├── Panomi.Data/        # SQLite database layer
+├── Panomi.Detection/   # Launcher & game detection
+└── Panomi.UI/          # WinUI 3 application
+```
+
+## Download
+
+Get the latest release from [GitHub Releases](https://github.com/dorsaljr/PANOMI_BETA/releases) or visit [panomi.org](https://panomi.org).
+
+## License
+
+[MIT](LICENSE) - Do whatever you want, just keep the copyright notice.
+
+## Links
+
+- [Website](https://panomi.org)
+- [Linktree](https://linktr.ee/panomiltd)
+- [GitHub](https://github.com/dorsaljr/PANOMI_BETA)
