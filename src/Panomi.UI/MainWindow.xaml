@@ -113,7 +113,6 @@
                                         
                                         <!-- Misc (alphabetical) -->
                                         <MenuFlyoutSubItem x:Name="WebMiscMenu" Text="Misc" Foreground="White">
-                                            <MenuFlyoutItem x:Name="WebAmazonStore" Text="Amazon" Click="WebLink_Click" Tag="https://www.amazon.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebGitHub" Text="GitHub" Click="WebLink_Click" Tag="https://www.github.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebGoogle" Text="Google" Click="WebLink_Click" Tag="https://www.google.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebWikipedia" Text="Wikipedia" Click="WebLink_Click" Tag="https://www.wikipedia.org" Foreground="White"/>
@@ -141,6 +140,13 @@
                                             <MenuFlyoutItem x:Name="WebAppleTV" Text="Apple TV+" Click="WebLink_Click" Tag="https://tv.apple.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebDisneyPlus" Text="Disney+" Click="WebLink_Click" Tag="https://www.disneyplus.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebNetflix" Text="Netflix" Click="WebLink_Click" Tag="https://www.netflix.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
+                                        <!-- Stores -->
+                                        <MenuFlyoutSubItem x:Name="WebStoresMenu" Text="Stores" Foreground="White">
+                                            <MenuFlyoutItem x:Name="WebAmazonUK" Text="Amazon UK" Click="WebLink_Click" Tag="https://www.amazon.co.uk?tag=panomiuk-21" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebAmazonUS" Text="Amazon US" Click="WebLink_Click" Tag="https://www.amazon.com?tag=panomi-20" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebHumbleBundle" Text="Humble Bundle" Click="WebLink_Click" Tag="https://www.humblebundle.com" Foreground="White"/>
                                         </MenuFlyoutSubItem>
                                         
                                         <!-- Support -->

@@ -183,6 +183,7 @@ public sealed partial class MainWindow : Window
         WebPCMenu.Text = Loc.Get("WebPC");
         WebSocialMediaMenu.Text = Loc.Get("WebSocialMedia");
         WebTVStreamingMenu.Text = Loc.Get("WebTVStreaming");
+        WebStoresMenu.Text = Loc.Get("WebStores");
         WebSupportMenu.Text = Loc.Get("WebSupport");
         
         // Update Launch button text on all items
