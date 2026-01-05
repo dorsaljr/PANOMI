@@ -83,8 +83,7 @@
                             </Button>
                             <Button x:Name="WebLinksButton"
                                     Width="44" Height="44" Padding="0" CornerRadius="10"
-                                    Style="{StaticResource DarkRectButtonStyle}"
-                                    ToolTipService.ToolTip="Web Links">
+                                    Style="{StaticResource DarkRectButtonStyle}">
                                 <FontIcon Glyph="&#xE774;" FontSize="20" Foreground="White"/>
                                 <Button.Flyout>
                                     <MenuFlyout Placement="BottomEdgeAlignedLeft">

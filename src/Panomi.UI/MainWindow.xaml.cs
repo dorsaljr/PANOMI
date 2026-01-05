@@ -254,7 +254,16 @@ public sealed partial class MainWindow : Window
         ["ko"] = "한국어",
         ["ja"] = "日本語",
         ["zh-CN"] = "中文",
-        ["hi"] = "हिन्दी"
+        ["hi"] = "हिन्दी",
+        ["ru"] = "Русский",
+        ["pl"] = "Polski",
+        ["tr"] = "Türkçe",
+        ["ar"] = "العربية",
+        ["ur"] = "اردو",
+        ["uk"] = "Українська",
+        ["id"] = "Indonesia",
+        ["vi"] = "Tiếng Việt",
+        ["th"] = "ไทย"
     };
     
     private void PopulateLanguagePanel()
