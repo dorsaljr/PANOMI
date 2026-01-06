@@ -48,6 +48,30 @@ public sealed partial class MainWindow : Window
     
     // Tray icon settings
     private TaskbarIcon? _trayIcon;
+    
+    /// <summary>
+    /// Normalizes a game name for duplicate detection by removing trademark symbols,
+    /// normalizing whitespace, and converting to lowercase.
+    /// </summary>
+    private static string NormalizeGameName(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return string.Empty;
+        
+        // Remove trademark/copyright symbols
+        var normalized = name
+            .Replace("™", "")
+            .Replace("®", "")
+            .Replace("©", "")
+            .Replace("℠", "")
+            .Replace("(TM)", "")
+            .Replace("(R)", "")
+            .Replace("(C)", "");
+        
+        // Normalize whitespace (multiple spaces to single, trim)
+        normalized = System.Text.RegularExpressions.Regex.Replace(normalized, @"\s+", " ").Trim();
+        
+        return normalized.ToLowerInvariant();
+    }
     private bool _minimizeToTray = true;  // Default ON for better first impression
     private bool _isReallyClosing = false;
 
@@ -851,7 +875,7 @@ public sealed partial class MainWindow : Window
         // Detect games that exist on multiple launchers
         var gameItems = _allItems.Where(i => !i.IsLauncher).ToList();
         var duplicateNames = gameItems
-            .GroupBy(g => g.Name.ToLowerInvariant().Trim())
+            .GroupBy(g => NormalizeGameName(g.Name))
             .Where(g => g.Count() > 1)
             .Select(g => g.Key)
             .ToHashSet();
@@ -859,7 +883,7 @@ public sealed partial class MainWindow : Window
         // Mark duplicates
         foreach (var gameItem in gameItems)
         {
-            gameItem.HasMultipleLaunchers = duplicateNames.Contains(gameItem.Name.ToLowerInvariant().Trim());
+            gameItem.HasMultipleLaunchers = duplicateNames.Contains(NormalizeGameName(gameItem.Name));
         }
         
         // Populate launcher filter checkboxes
@@ -1055,10 +1079,10 @@ public sealed partial class MainWindow : Window
     {
         var launcherCount = _allItems.Count(i => i.IsLauncher);
         
-        // Count unique games by name (not counting duplicates across launchers)
+        // Count unique games by normalized name (not counting duplicates across launchers)
         var uniqueGameCount = _allItems
             .Where(i => !i.IsLauncher)
-            .Select(i => i.Name.ToLowerInvariant().Trim())
+            .Select(i => NormalizeGameName(i.Name))
             .Distinct()
             .Count();
         

@@ -89,10 +89,20 @@ public class EAAppDetector : BaseLauncherDetector
         {
             try
             {
+                // Check HKLM first
                 var gameKeys = GetRegistrySubKeyNames(regPath);
                 foreach (var gameKey in gameKeys)
                 {
-                    var game = ParseGameFromRegistry(regPath, gameKey);
+                    var game = ParseGameFromRegistry(regPath, gameKey, useHKCU: false);
+                    if (game != null && !games.Any(g => g.Name == game.Name))
+                        games.Add(game);
+                }
+                
+                // Also check HKCU (some EA installations use this)
+                var userGameKeys = GetRegistrySubKeyNames(regPath, useHKCU: true);
+                foreach (var gameKey in userGameKeys)
+                {
+                    var game = ParseGameFromRegistry(regPath, gameKey, useHKCU: true);
                     if (game != null && !games.Any(g => g.Name == game.Name))
                         games.Add(game);
                 }
@@ -106,14 +116,16 @@ public class EAAppDetector : BaseLauncherDetector
         return games;
     }
 
-    private DetectedGame? ParseGameFromRegistry(string basePath, string gameKey)
+    private DetectedGame? ParseGameFromRegistry(string basePath, string gameKey, bool useHKCU = false)
     {
         try
         {
             var fullPath = $@"{basePath}\{gameKey}";
             
-            // Read install directory
-            var installDir = ReadRegistryValue(fullPath, "Install Dir");
+            // Read install directory from appropriate registry hive
+            var installDir = useHKCU 
+                ? ReadUserRegistryValue(fullPath, "Install Dir")
+                : ReadRegistryValue(fullPath, "Install Dir");
             if (string.IsNullOrEmpty(installDir) || !Directory.Exists(installDir))
                 return null;
 
@@ -157,6 +169,8 @@ public class EAAppDetector : BaseLauncherDetector
         var paths = new List<string>();
         var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
         var programFilesX86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+        var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var programData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
 
         // Standard EA Games folders
         paths.Add(Path.Combine(programFiles, "EA Games"));
@@ -170,6 +184,14 @@ public class EAAppDetector : BaseLauncherDetector
         paths.Add(Path.Combine(programFiles, "Electronic Arts"));
         paths.Add(Path.Combine(programFilesX86, "Electronic Arts"));
 
+        // EA Desktop InstallData paths (contains game install locations)
+        paths.AddRange(GetPathsFromEAInstallData(Path.Combine(programData, "EA Desktop", "InstallData")));
+        paths.AddRange(GetPathsFromEAInstallData(Path.Combine(localAppData, "Electronic Arts", "EA Desktop", "InstallData")));
+        
+        // Get paths from Origin manifest files
+        paths.AddRange(GetPathsFromOriginManifests(Path.Combine(programData, "Origin", "LocalContent")));
+        paths.AddRange(GetPathsFromOriginManifests(Path.Combine(localAppData, "Origin", "LocalContent")));
+
         // Check all fixed drives for EA Games folders
         try
         {
@@ -179,6 +201,8 @@ public class EAAppDetector : BaseLauncherDetector
                 paths.Add(Path.Combine(driveRoot, "EA Games"));
                 paths.Add(Path.Combine(driveRoot, "Origin Games"));
                 paths.Add(Path.Combine(driveRoot, "Games", "EA Games"));
+                paths.Add(Path.Combine(driveRoot, "Games", "Origin Games"));
+                paths.Add(Path.Combine(driveRoot, "Games", "Electronic Arts"));
             }
         }
         catch
@@ -186,7 +210,77 @@ public class EAAppDetector : BaseLauncherDetector
             // Ignore drive enumeration errors
         }
 
-        return paths.Distinct().ToList();
+        return paths.Where(p => !string.IsNullOrEmpty(p)).Distinct().ToList();
+    }
+
+    private List<string> GetPathsFromEAInstallData(string installDataPath)
+    {
+        var paths = new List<string>();
+        try
+        {
+            if (Directory.Exists(installDataPath))
+            {
+                // Each game has a subfolder containing install location
+                foreach (var gameDir in Directory.GetDirectories(installDataPath))
+                {
+                    var installPath = Path.GetDirectoryName(gameDir);
+                    if (!string.IsNullOrEmpty(installPath))
+                    {
+                        // The parent directory often contains multiple games
+                        var parentOfGame = Path.GetDirectoryName(installPath);
+                        if (!string.IsNullOrEmpty(parentOfGame))
+                            paths.Add(parentOfGame);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // Ignore errors
+        }
+        return paths;
+    }
+
+    private List<string> GetPathsFromOriginManifests(string manifestPath)
+    {
+        var paths = new List<string>();
+        try
+        {
+            if (Directory.Exists(manifestPath))
+            {
+                foreach (var mfstFile in Directory.GetFiles(manifestPath, "*.mfst"))
+                {
+                    try
+                    {
+                        var content = File.ReadAllText(mfstFile);
+                        // Parse dipinstallpath from manifest (URL-encoded format)
+                        var match = System.Text.RegularExpressions.Regex.Match(
+                            content, @"dipinstallpath=([^&\r\n]+)");
+                        if (match.Success)
+                        {
+                            var installPath = Uri.UnescapeDataString(match.Groups[1].Value);
+                            if (Directory.Exists(installPath))
+                            {
+                                paths.Add(installPath);
+                                // Also add parent folder as potential games root
+                                var parent = Path.GetDirectoryName(installPath);
+                                if (!string.IsNullOrEmpty(parent))
+                                    paths.Add(parent);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // Ignore individual manifest parse errors
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // Ignore errors
+        }
+        return paths;
     }
 
     private DetectedGame? ParseGameFolder(string gameFolder)
@@ -275,6 +369,29 @@ public class EAAppDetector : BaseLauncherDetector
                 }
             }
 
+            // Check nested subdirectories (The Sims 4 uses Game/Bin structure)
+            var nestedSubDirs = new[]
+            {
+                new[] { "Game", "Bin" },
+                new[] { "Game", "Bin", "x64" },
+                new[] { "Game", "Bin", "Win64" },
+                new[] { "__Installer", "Bin" },
+                new[] { "Binaries", "Win64" },
+            };
+            foreach (var nested in nestedSubDirs)
+            {
+                var subPath = Path.Combine(new[] { gameFolder }.Concat(nested).ToArray());
+                if (Directory.Exists(subPath))
+                {
+                    var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly);
+                    var mainExe = subExes
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .FirstOrDefault(f => !IsUtilityExe(Path.GetFileName(f)));
+                    if (mainExe != null)
+                        return mainExe;
+                }
+            }
+
             return rootExes.FirstOrDefault(f => !IsUtilityExe(Path.GetFileName(f)));
         }
         catch
@@ -340,7 +457,7 @@ public class EAAppDetector : BaseLauncherDetector
 
     private string? GetEAAppPath()
     {
-        // Try registry first
+        // Try HKLM registry first
         var path = ReadRegistryValue(EARegistryKey, "DesktopAppPath", use32BitView: true);
         if (!string.IsNullOrEmpty(path))
         {
@@ -360,6 +477,19 @@ public class EAAppDetector : BaseLauncherDetector
             if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
                 return dir;
         }
+        
+        // Try HKCU registry (some installations use this)
+        path = ReadUserRegistryValue(EARegistryKey, "DesktopAppPath");
+        if (!string.IsNullOrEmpty(path))
+        {
+            var dir = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+                return dir;
+        }
+        
+        path = ReadUserRegistryValue(EARegistryKey, "InstallLocation");
+        if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+            return path;
 
         // Common default paths
         var defaultPaths = new[]

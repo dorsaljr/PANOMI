@@ -420,16 +420,43 @@ public class UbisoftConnectDetector : BaseLauncherDetector
             }
 
             // Check common subdirectories
-            var subDirs = new[] { "bin", "Bin", "x64", "Win64" };
+            var subDirs = new[] { "bin", "Bin", "x64", "Win64", "Game", "Binaries" };
             foreach (var subDir in subDirs)
             {
                 var subPath = Path.Combine(installDir, subDir);
                 if (Directory.Exists(subPath))
                 {
                     var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly);
-                    var mainExe = subExes.FirstOrDefault(f => !IsUtilityExe(Path.GetFileName(f)));
+                    var mainExe = subExes
+                        .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .FirstOrDefault();
                     if (mainExe != null)
                         return mainExe;
+                }
+            }
+
+            // Check nested subdirectories
+            var nestedSubDirs = new[]
+            {
+                new[] { "Game", "Bin" },
+                new[] { "Game", "Bin", "x64" },
+                new[] { "Game", "Bin", "Win64" },
+                new[] { "Binaries", "Win64" },
+                new[] { "Binaries", "Win32" },
+                new[] { "bin", "x64" },
+            };
+            foreach (var nested in nestedSubDirs)
+            {
+                var subPath = Path.Combine(new[] { installDir }.Concat(nested).ToArray());
+                if (Directory.Exists(subPath))
+                {
+                    var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly)
+                        .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .ToList();
+                    if (subExes.Count > 0)
+                        return subExes.First();
                 }
             }
 

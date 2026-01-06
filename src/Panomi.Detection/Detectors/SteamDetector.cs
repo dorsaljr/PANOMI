@@ -164,10 +164,7 @@ public class SteamDetector : BaseLauncherDetector
         {
             // Look for exe files in root directory first
             var exeFiles = Directory.GetFiles(installPath, "*.exe", SearchOption.TopDirectoryOnly)
-                .Where(f => !Path.GetFileName(f).StartsWith("UnityCrashHandler", StringComparison.OrdinalIgnoreCase)
-                         && !Path.GetFileName(f).StartsWith("UE4PrereqSetup", StringComparison.OrdinalIgnoreCase)
-                         && !Path.GetFileName(f).StartsWith("CrashReportClient", StringComparison.OrdinalIgnoreCase)
-                         && !Path.GetFileName(f).Equals("unins000.exe", StringComparison.OrdinalIgnoreCase))
+                .Where(f => !IsUtilityExe(Path.GetFileName(f)))
                 .ToList();
 
             // Prefer exe matching game name or installdir
@@ -175,6 +172,50 @@ public class SteamDetector : BaseLauncherDetector
             executablePath = exeFiles.FirstOrDefault(f => 
                 Path.GetFileNameWithoutExtension(f).ToLowerInvariant().Replace(" ", "").Contains(gameLower)) 
                 ?? exeFiles.FirstOrDefault();
+            
+            // If no exe found in root, check common subdirectories
+            if (executablePath == null)
+            {
+                var subDirs = new[] { "Game", "Bin", "Binaries", "Win64", "x64", "Win32", "bin" };
+                foreach (var subDir in subDirs)
+                {
+                    var subPath = Path.Combine(installPath, subDir);
+                    if (Directory.Exists(subPath))
+                    {
+                        var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly)
+                            .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                            .ToList();
+                        executablePath = subExes.FirstOrDefault();
+                        if (executablePath != null) break;
+                    }
+                }
+            }
+            
+            // Check nested subdirectories (The Sims 4 uses Game/Bin structure)
+            if (executablePath == null)
+            {
+                var nestedSubDirs = new[]
+                {
+                    new[] { "Game", "Bin" },
+                    new[] { "Game", "Bin", "x64" },
+                    new[] { "Game", "Bin", "Win64" },
+                    new[] { "Binaries", "Win64" },
+                    new[] { "Binaries", "Win32" },
+                };
+                foreach (var nested in nestedSubDirs)
+                {
+                    var subPath = Path.Combine(new[] { installPath }.Concat(nested).ToArray());
+                    if (Directory.Exists(subPath))
+                    {
+                        var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly)
+                            .OrderByDescending(f => new FileInfo(f).Length)
+                            .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                            .ToList();
+                        executablePath = subExes.FirstOrDefault();
+                        if (executablePath != null) break;
+                    }
+                }
+            }
         }
 
         return new DetectedGame
@@ -185,5 +226,19 @@ public class SteamDetector : BaseLauncherDetector
             ExecutablePath = executablePath,
             LaunchCommand = $"steam://rungameid/{appId}"
         };
+    }
+
+    private bool IsUtilityExe(string fileName)
+    {
+        var lower = fileName.ToLowerInvariant();
+        var utilityPatterns = new[]
+        {
+            "unins", "crash", "report", "update", "patch",
+            "redist", "vcredist", "dxsetup", "dotnet",
+            "installer", "setup", "helper",
+            "unitycrashhandler", "ue4prereqsetup", "crashreportclient",
+            "eaanticheat", "easyanticheat"
+        };
+        return utilityPatterns.Any(p => lower.Contains(p));
     }
 }

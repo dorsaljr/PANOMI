@@ -214,7 +214,7 @@ public class BattleNetDetector : BaseLauncherDetector
     {
         try
         {
-            // Known executable names for Blizzard games
+            // Known executable names for Blizzard games (as hints)
             var knownExes = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
             {
                 { "wow", new[] { "Wow.exe", "WowClassic.exe" } },
@@ -229,6 +229,7 @@ public class BattleNetDetector : BaseLauncherDetector
                 { "w3", new[] { "Warcraft III.exe", "war3.exe" } },
             };
 
+            // Try known exe names first
             if (knownExes.TryGetValue(gameCode, out var exeNames))
             {
                 foreach (var exeName in exeNames)
@@ -236,25 +237,64 @@ public class BattleNetDetector : BaseLauncherDetector
                     var exePath = Path.Combine(installPath, exeName);
                     if (File.Exists(exePath))
                         return exePath;
-                    
-                    // Check x64 subfolder
-                    exePath = Path.Combine(installPath, "x64", exeName);
-                    if (File.Exists(exePath))
-                        return exePath;
-                    
-                    // Check _retail_ subfolder (WoW)
-                    exePath = Path.Combine(installPath, "_retail_", exeName);
-                    if (File.Exists(exePath))
-                        return exePath;
                 }
             }
 
-            // Fallback: find any exe
+            // Check root directory
             var rootExes = Directory.GetFiles(installPath, "*.exe", SearchOption.TopDirectoryOnly);
-            return rootExes
-                .Where(f => !IsUtilityExe(Path.GetFileName(f)))
-                .OrderByDescending(f => new FileInfo(f).Length)
-                .FirstOrDefault();
+            if (rootExes.Length > 0)
+            {
+                var bestMatch = rootExes
+                    .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                    .OrderByDescending(f => new FileInfo(f).Length)
+                    .FirstOrDefault();
+                if (bestMatch != null)
+                    return bestMatch;
+            }
+
+            // Check common subdirectories
+            var subDirs = new[] { "x64", "_retail_", "bin", "Bin", "Win64", "Game", "Binaries" };
+            foreach (var subDir in subDirs)
+            {
+                var subPath = Path.Combine(installPath, subDir);
+                if (Directory.Exists(subPath))
+                {
+                    var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly);
+                    var mainExe = subExes
+                        .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .FirstOrDefault();
+                    if (mainExe != null)
+                        return mainExe;
+                }
+            }
+
+            // Check nested subdirectories
+            var nestedSubDirs = new[]
+            {
+                new[] { "Game", "Bin" },
+                new[] { "Game", "Bin", "x64" },
+                new[] { "Game", "Bin", "Win64" },
+                new[] { "Binaries", "Win64" },
+                new[] { "Binaries", "Win32" },
+                new[] { "_retail_", "x64" },
+                new[] { "x64", "release" },
+            };
+            foreach (var nested in nestedSubDirs)
+            {
+                var subPath = Path.Combine(new[] { installPath }.Concat(nested).ToArray());
+                if (Directory.Exists(subPath))
+                {
+                    var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly)
+                        .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .ToList();
+                    if (subExes.Count > 0)
+                        return subExes.First();
+                }
+            }
+
+            return rootExes.FirstOrDefault();
         }
         catch
         {

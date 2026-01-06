@@ -12,6 +12,30 @@ public sealed partial class LibraryPage : Page
     
     private readonly IGameService _gameService;
 
+    /// <summary>
+    /// Normalizes a game name for duplicate detection by removing trademark symbols,
+    /// normalizing whitespace, and converting to lowercase.
+    /// </summary>
+    private static string NormalizeGameName(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return string.Empty;
+        
+        // Remove trademark/copyright symbols
+        var normalized = name
+            .Replace("™", "")
+            .Replace("®", "")
+            .Replace("©", "")
+            .Replace("℠", "")
+            .Replace("(TM)", "")
+            .Replace("(R)", "")
+            .Replace("(C)", "");
+        
+        // Normalize whitespace (multiple spaces to single, trim)
+        normalized = System.Text.RegularExpressions.Regex.Replace(normalized, @"\s+", " ").Trim();
+        
+        return normalized.ToLowerInvariant();
+    }
+
     public LibraryPage()
     {
         this.InitializeComponent();
@@ -29,14 +53,14 @@ public sealed partial class LibraryPage : Page
         
         // Find games that exist on multiple launchers (by normalized name)
         var duplicateNames = games
-            .GroupBy(g => g.Name.ToLowerInvariant().Trim())
+            .GroupBy(g => NormalizeGameName(g.Name))
             .Where(g => g.Count() > 1)
             .Select(g => g.Key)
             .ToHashSet();
         
         foreach (var game in games)
         {
-            var isDuplicate = duplicateNames.Contains(game.Name.ToLowerInvariant().Trim());
+            var isDuplicate = duplicateNames.Contains(NormalizeGameName(game.Name));
             Games.Add(new GameViewModel(game, isDuplicate));
         }
         
@@ -75,14 +99,14 @@ public sealed partial class LibraryPage : Page
         
         // Find games that exist on multiple launchers
         var duplicateNames = games
-            .GroupBy(g => g.Name.ToLowerInvariant().Trim())
+            .GroupBy(g => NormalizeGameName(g.Name))
             .Where(g => g.Count() > 1)
             .Select(g => g.Key)
             .ToHashSet();
         
         foreach (var game in games)
         {
-            var isDuplicate = duplicateNames.Contains(game.Name.ToLowerInvariant().Trim());
+            var isDuplicate = duplicateNames.Contains(NormalizeGameName(game.Name));
             Games.Add(new GameViewModel(game, isDuplicate));
         }
         

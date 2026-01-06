@@ -300,48 +300,81 @@ public class RockstarDetector : BaseLauncherDetector
         }
     }
 
-    private static string? FindMainExecutable(string installPath, string gameName)
+    private string? FindMainExecutable(string installPath, string gameName)
     {
-        // Common Rockstar game executables
-        var possibleExes = new[]
-        {
-            // GTA V
-            "GTA5.exe",
-            "PlayGTAV.exe",
-            // RDR2
-            "RDR2.exe",
-            // LA Noire
-            "LANoire.exe",
-            // GTA IV
-            "GTAIV.exe",
-            "LaunchGTAIV.exe",
-            // Max Payne 3
-            "MaxPayne3.exe",
-            // Bully
-            "Bully.exe",
-        };
-
-        foreach (var exe in possibleExes)
-        {
-            var exePath = Path.Combine(installPath, exe);
-            if (File.Exists(exePath))
-                return exePath;
-        }
-
-        // Try to find any exe in root
         try
         {
-            var exes = Directory.GetFiles(installPath, "*.exe", SearchOption.TopDirectoryOnly);
-            var mainExe = exes.FirstOrDefault(e => 
-                !Path.GetFileName(e).Contains("unins", StringComparison.OrdinalIgnoreCase) &&
-                !Path.GetFileName(e).Contains("crash", StringComparison.OrdinalIgnoreCase) &&
-                !Path.GetFileName(e).Contains("redist", StringComparison.OrdinalIgnoreCase));
-            
-            if (mainExe != null)
-                return mainExe;
-        }
-        catch { }
+            // Check root directory first
+            var rootExes = Directory.GetFiles(installPath, "*.exe", SearchOption.TopDirectoryOnly);
+            if (rootExes.Length > 0)
+            {
+                var bestMatch = rootExes
+                    .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                    .OrderByDescending(f => new FileInfo(f).Length)
+                    .FirstOrDefault();
+                if (bestMatch != null)
+                    return bestMatch;
+            }
 
-        return null;
+            // Check common subdirectories
+            var subDirs = new[] { "bin", "Bin", "x64", "Win64", "Game", "Binaries" };
+            foreach (var subDir in subDirs)
+            {
+                var subPath = Path.Combine(installPath, subDir);
+                if (Directory.Exists(subPath))
+                {
+                    var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly);
+                    var mainExe = subExes
+                        .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .FirstOrDefault();
+                    if (mainExe != null)
+                        return mainExe;
+                }
+            }
+
+            // Check nested subdirectories
+            var nestedSubDirs = new[]
+            {
+                new[] { "Game", "Bin" },
+                new[] { "Game", "Bin", "x64" },
+                new[] { "Game", "Bin", "Win64" },
+                new[] { "Binaries", "Win64" },
+                new[] { "Binaries", "Win32" },
+                new[] { "bin", "x64" },
+            };
+            foreach (var nested in nestedSubDirs)
+            {
+                var subPath = Path.Combine(new[] { installPath }.Concat(nested).ToArray());
+                if (Directory.Exists(subPath))
+                {
+                    var subExes = Directory.GetFiles(subPath, "*.exe", SearchOption.TopDirectoryOnly)
+                        .Where(f => !IsUtilityExe(Path.GetFileName(f)))
+                        .OrderByDescending(f => new FileInfo(f).Length)
+                        .ToList();
+                    if (subExes.Count > 0)
+                        return subExes.First();
+                }
+            }
+
+            return rootExes.FirstOrDefault();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool IsUtilityExe(string fileName)
+    {
+        var lower = fileName.ToLowerInvariant();
+        var utilityPatterns = new[]
+        {
+            "unins", "crash", "report", "update", "patch",
+            "redist", "vcredist", "dxsetup", "dotnet",
+            "installer", "setup", "helper", "launcher",
+            "socialclub", "subprocess"
+        };
+        return utilityPatterns.Any(p => lower.Contains(p));
     }
 }

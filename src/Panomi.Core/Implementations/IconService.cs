@@ -2,8 +2,8 @@ using Panomi.Core.Models;
 using Panomi.Core.Services;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Security.Cryptography;
 
 namespace Panomi.Core.Implementations;
 
@@ -17,11 +17,27 @@ public class IconService : IIconService
     private readonly string _iconsFolderPath;
     private const int IconSize = 256; // Best quality for modern displays
     
-    // MD5 hashes of known generic/ugly Windows icons to filter out
-    private static readonly HashSet<string> _genericIconHashes = new(StringComparer.OrdinalIgnoreCase)
+    // P/Invoke for checking if exe has embedded icons
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+    private static extern int ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, IntPtr[] phiconSmall, int nIcons);
+    
+    /// <summary>
+    /// Checks if an executable has embedded icon resources.
+    /// Returns false if the exe has no icons (Windows would show default blue icon).
+    /// </summary>
+    private static bool HasEmbeddedIcon(string executablePath)
     {
-        "D61BEA93E7C29C21D322C5758882D6B0", // Generic Windows executable icon (blue square)
-    };
+        try
+        {
+            // ExtractIconEx with nIconIndex = -1 returns total icon count
+            int iconCount = ExtractIconEx(executablePath, -1, null!, null!, 0);
+            return iconCount > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
     public string IconsFolderPath => _iconsFolderPath;
 
@@ -85,6 +101,11 @@ public class IconService : IIconService
         // Return cached icon if it exists
         if (File.Exists(cachePath))
             return cachePath;
+        
+        // Check if the executable has embedded icon resources
+        // If not, Windows would return the default blue icon - skip and use placeholder
+        if (!HasEmbeddedIcon(executablePath))
+            return null;
 
         // Ensure folder exists
         EnsureIconsFolderExists();
@@ -101,14 +122,6 @@ public class IconService : IIconService
             if (bitmap != null)
             {
                 bitmap.Save(cachePath, ImageFormat.Png);
-                
-                // Check if it's a generic icon we want to filter out
-                if (IsGenericIcon(cachePath))
-                {
-                    File.Delete(cachePath);
-                    return null;
-                }
-                
                 return cachePath;
             }
         }
@@ -180,25 +193,5 @@ public class IconService : IIconService
             .ToArray());
         
         return sanitized.Trim();
-    }
-    
-    /// <summary>
-    /// Check if the icon file matches a known generic/ugly Windows icon
-    /// </summary>
-    private static bool IsGenericIcon(string iconPath)
-    {
-        try
-        {
-            var fileBytes = File.ReadAllBytes(iconPath);
-            using var md5 = MD5.Create();
-            var hashBytes = md5.ComputeHash(fileBytes);
-            var hashString = BitConverter.ToString(hashBytes).Replace("-", "");
-            
-            return _genericIconHashes.Contains(hashString);
-        }
-        catch
-        {
-            return false;
-        }
     }
 }
