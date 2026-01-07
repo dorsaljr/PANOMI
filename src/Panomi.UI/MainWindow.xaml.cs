@@ -601,10 +601,14 @@ public sealed partial class MainWindow : Window
         _trayIcon.LeftClickCommand = new RelayCommand(ShowFromTray);
         
         // Create context menu with just Exit option
+        // Note: H.NotifyIcon's default PopupMenu mode only supports Command, not Click events
         var contextMenu = new MenuFlyout();
         
-        var exitItem = new MenuFlyoutItem { Text = "Exit" };
-        exitItem.Click += TrayExit_Click;
+        var exitItem = new MenuFlyoutItem 
+        { 
+            Text = "Exit",
+            Command = new RelayCommand(ExitFromTray)
+        };
         contextMenu.Items.Add(exitItem);
         
         _trayIcon.ContextFlyout = contextMenu;
@@ -614,6 +618,11 @@ public sealed partial class MainWindow : Window
     }
     
     private void TrayExit_Click(object sender, RoutedEventArgs e)
+    {
+        ExitFromTray();
+    }
+    
+    private void ExitFromTray()
     {
         _isReallyClosing = true;
         _trayIcon?.Dispose();
