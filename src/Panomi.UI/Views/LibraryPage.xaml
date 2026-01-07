@@ -66,10 +66,12 @@
                         <!-- Game Icon/Cover -->
                         <Border Grid.Row="0" CornerRadius="8,8,0,0">
                             <Grid>
-                                <FontIcon 
-                                    Glyph="&#xE7FC;" 
-                                    FontSize="48" 
-                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                <!-- Panomi logo fallback when no icon -->
+                                <Image 
+                                    Source="ms-appx:///Assets/logo_png.png"
+                                    Stretch="Uniform"
+                                    Width="48"
+                                    Height="48"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Visibility="{Binding HasIcon, Converter={StaticResource BoolToVisibilityInverseConverter}}"/>
