@@ -82,6 +82,14 @@ public class EAAppDetector : BaseLauncherDetector
             }
         }
 
+        // Final fallback: Scan drive roots for EA games installed directly (e.g., D:\The Sims 4\)
+        var driveRootGames = ScanDriveRootsForEAGames();
+        foreach (var game in driveRootGames)
+        {
+            if (!result.Games.Any(g => g.Name == game.Name))
+                result.Games.Add(game);
+        }
+
         return Task.FromResult(result);
     }
 
@@ -139,6 +147,108 @@ public class EAAppDetector : BaseLauncherDetector
         }
         
         return games;
+    }
+
+    private List<DetectedGame> ScanDriveRootsForEAGames()
+    {
+        var games = new List<DetectedGame>();
+        
+        try
+        {
+            // Scan all fixed drives
+            foreach (var drive in DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed && d.IsReady))
+            {
+                try
+                {
+                    var driveRoot = drive.RootDirectory.FullName;
+                    
+                    // Scan up to 3 levels deep from drive root
+                    // Level 1: D:\The Sims 4\
+                    // Level 2: D:\EA\The Sims 4\
+                    // Level 3: D:\Games\EA\The Sims 4\
+                    ScanFolderForEAGames(driveRoot, games, maxDepth: 3, currentDepth: 0);
+                }
+                catch
+                {
+                    // Skip drives we can't access
+                }
+            }
+        }
+        catch
+        {
+            // Ignore drive enumeration errors
+        }
+        
+        return games;
+    }
+
+    private void ScanFolderForEAGames(string folderPath, List<DetectedGame> games, int maxDepth, int currentDepth)
+    {
+        if (currentDepth >= maxDepth)
+            return;
+        
+        try
+        {
+            foreach (var subfolder in Directory.GetDirectories(folderPath))
+            {
+                // Skip system/hidden folders for performance
+                var folderName = Path.GetFileName(subfolder);
+                if (IsSystemFolder(folderName))
+                    continue;
+                
+                // Check if this folder is an EA game
+                var game = CheckFolderForEAGame(subfolder);
+                if (game != null)
+                {
+                    games.Add(game);
+                    // Don't recurse into game folders
+                    continue;
+                }
+                
+                // Recurse deeper
+                ScanFolderForEAGames(subfolder, games, maxDepth, currentDepth + 1);
+            }
+        }
+        catch
+        {
+            // Skip folders we can't access
+        }
+    }
+
+    private static bool IsSystemFolder(string folderName)
+    {
+        // Skip folders that definitely don't contain games
+        var skipFolders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "$Recycle.Bin", "$WinREAgent", "Config.Msi", "Documents and Settings",
+            "PerfLogs", "Program Files", "Program Files (x86)", "ProgramData",
+            "Recovery", "System Volume Information", "Users", "Windows",
+            "msdownld.tmp", "Boot", "ESD"
+        };
+        return skipFolders.Contains(folderName) || folderName.StartsWith("$");
+    }
+
+    private DetectedGame? CheckFolderForEAGame(string folderPath)
+    {
+        try
+        {
+            // EA games have __Installer/installerdata.xml
+            var installerDataPath = Path.Combine(folderPath, "__Installer", "installerdata.xml");
+            if (!File.Exists(installerDataPath))
+                return null;
+            
+            // Validate it's actually an EA game by checking XML content
+            var xmlContent = File.ReadAllText(installerDataPath);
+            if (!xmlContent.Contains("<DiPManifest") && !xmlContent.Contains("<contentIDs>"))
+                return null;
+            
+            // Use existing ParseGameFolder which handles validation and exe finding
+            return ParseGameFolder(folderPath);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     private List<DetectedGame> GetGamesFromRegistry()
