@@ -600,15 +600,11 @@ public sealed partial class MainWindow : Window
         // Set up left click to show window
         _trayIcon.LeftClickCommand = new RelayCommand(ShowFromTray);
         
-        // Create context menu
+        // Create context menu with just Exit option
         var contextMenu = new MenuFlyout();
         
-        var showItem = new MenuFlyoutItem { Text = "Show" };
-        showItem.Click += (s, e) => ShowFromTray();
-        contextMenu.Items.Add(showItem);
-        
         var exitItem = new MenuFlyoutItem { Text = "Exit" };
-        exitItem.Click += (s, e) => ExitApplication();
+        exitItem.Click += TrayExit_Click;
         contextMenu.Items.Add(exitItem);
         
         _trayIcon.ContextFlyout = contextMenu;
@@ -617,8 +613,12 @@ public sealed partial class MainWindow : Window
         _trayIcon.ForceCreate();
     }
     
-    private void TrayShow_Click(object sender, RoutedEventArgs e) => ShowFromTray();
-    private void TrayExit_Click(object sender, RoutedEventArgs e) => ExitApplication();
+    private void TrayExit_Click(object sender, RoutedEventArgs e)
+    {
+        _isReallyClosing = true;
+        _trayIcon?.Dispose();
+        Application.Current.Exit();
+    }
     
     private class RelayCommand : System.Windows.Input.ICommand
     {
