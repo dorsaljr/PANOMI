@@ -26,20 +26,32 @@
             -webkit-text-fill-color: transparent;
         }
         .tagline { font-size: 1.25rem; color: #8888aa; margin-bottom: 12px; }
-        .languages { font-size: 0.85rem; color: #666688; margin-bottom: 24px; }
+        .languages { font-size: 0.85rem; color: #666688; margin-bottom: 40px; }
         .launchers { font-size: 0.85rem; color: #666688; margin-bottom: 40px; }
         .section-label { color: #888; margin-bottom: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
         .download-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #00d4ff, #00a8cc);
-            color: #000;
-            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
             font-weight: 600;
-            padding: 16px 48px;
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
         }
-        .download-btn:hover { box-shadow: 0 8px 30px rgba(0,212,255,0.3); }
+        .store-btn {
+            background: linear-gradient(135deg, #00d4ff, #00a8cc);
+            color: #000;
+        }
+        .store-btn:hover { box-shadow: 0 8px 30px rgba(0,212,255,0.3); }
+        .github-btn {
+            background: transparent;
+            border: 2px solid #444;
+            color: #fff;
+        }
+        .github-btn:hover { border-color: #666; background: rgba(255,255,255,0.05); }
+        .store-icon, .github-icon { width: 20px; height: 20px; }
         .version { margin-top: 16px; font-size: 0.85rem; color: #666688; }
         .footer { margin-top: 60px; font-size: 0.8rem; color: #444466; }
         .footer a { color: #00d4ff; text-decoration: none; }
@@ -53,9 +65,23 @@
         <p class="launchers">Steam • Epic Games • GOG Galaxy • EA App • Ubisoft Connect • Battle.net • Riot Games • Rockstar • Minecraft • Roblox</p>
         <p class="section-label">Available In</p>
         <p class="languages">English • Español • Português • Français • Deutsch • Italiano • 한국어 • 日本語 • 中文 • हिन्दी • Русский • Polski • Türkçe • العربية • اردو • Українська • Indonesia • Tiếng Việt • ไทย</p>
-        <a href="https://github.com/dorsaljr/PANOMI_BETA/releases" class="download-btn">
-            Download for Windows
-        </a>
+        <div class="buttons">
+            <a href="#" class="download-btn store-btn">
+                <svg class="store-icon" viewBox="0 0 23 23" width="20" height="20">
+                    <rect x="1" y="1" width="10" height="10" fill="currentColor"/>
+                    <rect x="12" y="1" width="10" height="10" fill="currentColor"/>
+                    <rect x="1" y="12" width="10" height="10" fill="currentColor"/>
+                    <rect x="12" y="12" width="10" height="10" fill="currentColor"/>
+                </svg>
+                Get it on Microsoft Store
+            </a>
+            <a href="https://github.com/dorsaljr/PANOMI_BETA/releases" class="download-btn github-btn">
+                <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                GitHub (Developers)
+            </a>
+        </div>
         <p class="version">V1.3.0 Beta • Windows 11</p>
         <p class="footer"><a href="https://github.com/dorsaljr/PANOMI_BETA">View on GitHub</a> • <a href="https://linktr.ee/panomiltd">Linktree</a></p>
         <p class="footer" style="margin-top: 12px; font-size: 0.7rem;">Some links are affiliate links. As an Amazon Associate, I earn from qualifying purchases.</p>
