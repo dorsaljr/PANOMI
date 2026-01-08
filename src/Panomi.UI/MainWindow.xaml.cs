@@ -297,7 +297,9 @@ public sealed partial class MainWindow : Window
         ["ro"] = "Română",
         ["cs"] = "Čeština",
         ["sr"] = "Српски",
-        ["nl"] = "Nederlands"
+        ["nl"] = "Nederlands",
+        ["sq"] = "Shqip",
+        ["fil"] = "Filipino"
     };
     
     private void PopulateLanguagePanel()
