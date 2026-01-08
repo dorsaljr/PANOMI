@@ -289,7 +289,10 @@ public sealed partial class MainWindow : Window
         ["uk"] = "Українська",
         ["id"] = "Indonesia",
         ["vi"] = "Tiếng Việt",
-        ["th"] = "ไทย"
+        ["th"] = "ไทย",
+        ["fa"] = "فارسی",
+        ["bn"] = "বাংলা",
+        ["sw"] = "Kiswahili"
     };
     
     private void PopulateLanguagePanel()
