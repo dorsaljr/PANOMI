@@ -667,6 +667,9 @@ public sealed partial class MainWindow : Window
         // Show and activate window
         _appWindow?.Show();
         this.Activate();
+        
+        // Check for updates when showing from tray
+        CheckForUpdateButton();
     }
     
     private void ExitApplication()
