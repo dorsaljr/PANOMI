@@ -299,7 +299,7 @@ public sealed partial class MainWindow : Window
         ["sr"] = "Српски",
         ["nl"] = "Nederlands",
         ["sq"] = "Shqip",
-        ["fil"] = "Filipino"
+        ["fil"] = "Tagalog"
     };
     
     private void PopulateLanguagePanel()
