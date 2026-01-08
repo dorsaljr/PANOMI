@@ -662,13 +662,14 @@ public sealed partial class MainWindow : Window
         public void Execute(object? parameter) => _execute();
     }
     
-    public void ShowFromTray()
+    public async void ShowFromTray()
     {
         // Show and activate window
         _appWindow?.Show();
         this.Activate();
         
         // Check for updates when showing from tray
+        await UpdateService.CheckForUpdatesAsync();
         CheckForUpdateButton();
     }
     
