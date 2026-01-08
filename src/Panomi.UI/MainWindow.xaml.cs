@@ -670,7 +670,15 @@ public sealed partial class MainWindow : Window
         
         // Check for updates when showing from tray
         await UpdateService.CheckForUpdatesAsync();
-        CheckForUpdateButton();
+        
+        // Show update button immediately if update is available (no delay needed since we awaited the check)
+        if (UpdateService.HasPendingUpdate)
+        {
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                UpdateButton.Visibility = Visibility.Visible;
+            });
+        }
     }
     
     private void ExitApplication()
