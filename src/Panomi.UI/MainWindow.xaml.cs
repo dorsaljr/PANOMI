@@ -292,7 +292,12 @@ public sealed partial class MainWindow : Window
         ["th"] = "ไทย",
         ["fa"] = "فارسی",
         ["bn"] = "বাংলা",
-        ["sw"] = "Kiswahili"
+        ["sw"] = "Kiswahili",
+        ["el"] = "Ελληνικά",
+        ["ro"] = "Română",
+        ["cs"] = "Čeština",
+        ["sr"] = "Српски",
+        ["nl"] = "Nederlands"
     };
     
     private void PopulateLanguagePanel()
