@@ -131,7 +131,6 @@
                                             <MenuFlyoutSubItem x:Name="WebFilmDatabasesMenu" Text="Film Databases" Foreground="White">
                                                 <MenuFlyoutItem x:Name="WebBoxOfficeMojo" Text="Box Office Mojo" Click="WebLink_Click" Tag="https://www.boxofficemojo.com" Foreground="White"/>
                                                 <MenuFlyoutItem x:Name="WebIMDB" Text="IMDB" Click="WebLink_Click" Tag="https://www.imdb.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebJustWatch" Text="JustWatch" Click="WebLink_Click" Tag="https://www.justwatch.com" Foreground="White"/>
                                                 <MenuFlyoutItem x:Name="WebLetterboxd" Text="Letterboxd" Click="WebLink_Click" Tag="https://letterboxd.com" Foreground="White"/>
                                                 <MenuFlyoutItem x:Name="WebMetacritic" Text="Metacritic" Click="WebLink_Click" Tag="https://www.metacritic.com" Foreground="White"/>
                                                 <MenuFlyoutItem x:Name="WebRottenTomatoes" Text="Rotten Tomatoes" Click="WebLink_Click" Tag="https://www.rottentomatoes.com" Foreground="White"/>
