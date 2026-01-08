@@ -83,6 +83,7 @@ public sealed partial class MainWindow : Window
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
         var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
         _appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+        _appWindow.Title = "PANOMI";
         _appWindow.Resize(new Windows.Graphics.SizeInt32(1400, 900));
         
         // Listen for window state changes
@@ -101,7 +102,7 @@ public sealed partial class MainWindow : Window
             _appWindow.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(255, 15, 17, 20);
         }
         
-        Title = "";
+        Title = "PANOMI";
         
         _gameService = App.GetService<IGameService>();
         _launcherService = App.GetService<ILauncherService>();
