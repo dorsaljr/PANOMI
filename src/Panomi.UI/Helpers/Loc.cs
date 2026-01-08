@@ -46,9 +46,13 @@ public static class Loc
             ["WebBaidu"] = "Baidu Tieba",
             ["WebBilibili"] = "Bilibili",
             ["WebDouyin"] = "Douyin",
+            ["WebIQIYI"] = "iQIYI",
+            ["WebMangoTV"] = "Mango TV",
+            ["WebTencentVideo"] = "Tencent Video",
             ["WebWeChat"] = "WeChat",
             ["WebWeibo"] = "Weibo",
-            ["WebXiaohongshu"] = "Xiaohongshu"
+            ["WebXiaohongshu"] = "Xiaohongshu",
+            ["WebYouku"] = "Youku"
         },
         ["es"] = new()
         {
@@ -301,9 +305,13 @@ public static class Loc
             ["WebBaidu"] = "百度贴吧",
             ["WebBilibili"] = "哔哩哔哩",
             ["WebDouyin"] = "抖音",
+            ["WebIQIYI"] = "爱奇艺",
+            ["WebMangoTV"] = "芒果TV",
+            ["WebTencentVideo"] = "腾讯视频",
             ["WebWeChat"] = "微信",
             ["WebWeibo"] = "微博",
-            ["WebXiaohongshu"] = "小红书"
+            ["WebXiaohongshu"] = "小红书",
+            ["WebYouku"] = "优酷"
         },
         ["hi"] = new()
         {

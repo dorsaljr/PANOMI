@@ -216,9 +216,13 @@ public sealed partial class MainWindow : Window
         WebBaidu.Text = Loc.Get("WebBaidu");
         WebBilibili.Text = Loc.Get("WebBilibili");
         WebDouyin.Text = Loc.Get("WebDouyin");
+        WebIQIYI.Text = Loc.Get("WebIQIYI");
+        WebMangoTV.Text = Loc.Get("WebMangoTV");
+        WebTencentVideo.Text = Loc.Get("WebTencentVideo");
         WebWeChat.Text = Loc.Get("WebWeChat");
         WebWeibo.Text = Loc.Get("WebWeibo");
         WebXiaohongshu.Text = Loc.Get("WebXiaohongshu");
+        WebYouku.Text = Loc.Get("WebYouku");
         
         // Update Launch button text on all items
         var launchText = Loc.Get("LaunchButton");
