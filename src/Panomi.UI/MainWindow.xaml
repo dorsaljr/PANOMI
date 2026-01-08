@@ -116,6 +116,14 @@
                                             <MenuFlyoutItem x:Name="WebGitHub" Text="GitHub" Click="WebLink_Click" Tag="https://www.github.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebGoogle" Text="Google" Click="WebLink_Click" Tag="https://www.google.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebWikipedia" Text="Wikipedia" Click="WebLink_Click" Tag="https://www.wikipedia.org" Foreground="White"/>
+                                            <MenuFlyoutSubItem x:Name="WebChineseMenu" Text="🇨🇳 Chinese Platforms" Foreground="White">
+                                                <MenuFlyoutItem x:Name="WebBaidu" Text="Baidu Tieba" Click="WebLink_Click" Tag="https://tieba.baidu.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebBilibili" Text="Bilibili" Click="WebLink_Click" Tag="https://www.bilibili.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebDouyin" Text="Douyin" Click="WebLink_Click" Tag="https://www.douyin.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebWeChat" Text="WeChat" Click="WebLink_Click" Tag="https://weixin.qq.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebWeibo" Text="Weibo" Click="WebLink_Click" Tag="https://weibo.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebXiaohongshu" Text="Xiaohongshu" Click="WebLink_Click" Tag="https://www.xiaohongshu.com" Foreground="White"/>
+                                            </MenuFlyoutSubItem>
                                         </MenuFlyoutSubItem>
                                         
                                         <!-- PC (alphabetical) -->

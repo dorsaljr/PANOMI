@@ -211,6 +211,15 @@ public sealed partial class MainWindow : Window
         WebStoresMenu.Text = Loc.Get("WebStores");
         WebSupportMenu.Text = Loc.Get("WebSupport");
         
+        // Chinese platforms submenu
+        WebChineseMenu.Text = Loc.Get("WebChinese");
+        WebBaidu.Text = Loc.Get("WebBaidu");
+        WebBilibili.Text = Loc.Get("WebBilibili");
+        WebDouyin.Text = Loc.Get("WebDouyin");
+        WebWeChat.Text = Loc.Get("WebWeChat");
+        WebWeibo.Text = Loc.Get("WebWeibo");
+        WebXiaohongshu.Text = Loc.Get("WebXiaohongshu");
+        
         // Update Launch button text on all items
         var launchText = Loc.Get("LaunchButton");
         foreach (var item in _allItems)

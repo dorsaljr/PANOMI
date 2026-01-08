@@ -41,7 +41,14 @@ public static class Loc
             ["WebSocialMedia"] = "Social Media",
             ["WebTVStreaming"] = "TV Streaming",
             ["WebStores"] = "Stores",
-            ["WebSupport"] = "Support PANOMI"
+            ["WebSupport"] = "Support PANOMI",
+            ["WebChinese"] = "🇨🇳 Chinese Platforms",
+            ["WebBaidu"] = "Baidu Tieba",
+            ["WebBilibili"] = "Bilibili",
+            ["WebDouyin"] = "Douyin",
+            ["WebWeChat"] = "WeChat",
+            ["WebWeibo"] = "Weibo",
+            ["WebXiaohongshu"] = "Xiaohongshu"
         },
         ["es"] = new()
         {
@@ -289,7 +296,14 @@ public static class Loc
             ["WebSocialMedia"] = "社交媒体",
             ["WebTVStreaming"] = "视频流媒体",
             ["WebStores"] = "商店",
-            ["WebSupport"] = "支持PANOMI"
+            ["WebSupport"] = "支持PANOMI",
+            ["WebChinese"] = "🇨🇳 中国平台",
+            ["WebBaidu"] = "百度贴吧",
+            ["WebBilibili"] = "哔哩哔哩",
+            ["WebDouyin"] = "抖音",
+            ["WebWeChat"] = "微信",
+            ["WebWeibo"] = "微博",
+            ["WebXiaohongshu"] = "小红书"
         },
         ["hi"] = new()
         {
