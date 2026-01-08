@@ -135,7 +135,12 @@
                                         <MenuFlyoutSubItem x:Name="WebSocialMediaMenu" Text="Social Media" Foreground="White">
                                             <MenuFlyoutItem x:Name="WebFacebook" Text="Facebook" Click="WebLink_Click" Tag="https://www.facebook.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebInstagram" Text="Instagram" Click="WebLink_Click" Tag="https://www.instagram.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebMessenger" Text="Messenger" Click="WebLink_Click" Tag="https://www.messenger.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebPinterest" Text="Pinterest" Click="WebLink_Click" Tag="https://www.pinterest.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebReddit" Text="Reddit" Click="WebLink_Click" Tag="https://www.reddit.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebSnapchat" Text="Snapchat" Click="WebLink_Click" Tag="https://www.snapchat.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebTelegram" Text="Telegram" Click="WebLink_Click" Tag="https://web.telegram.org" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebThreads" Text="Threads" Click="WebLink_Click" Tag="https://www.threads.net" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebTikTok" Text="TikTok" Click="WebLink_Click" Tag="https://www.tiktok.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebWhatsApp" Text="WhatsApp" Click="WebLink_Click" Tag="https://web.whatsapp.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebX" Text="X" Click="WebLink_Click" Tag="https://www.x.com" Foreground="White"/>
