@@ -58,8 +58,7 @@
                             </Button>
                             <Button x:Name="AILinksButton"
                                     Width="44" Height="44" Padding="0" CornerRadius="10"
-                                    Style="{StaticResource DarkRectButtonStyle}"
-                                    ToolTipService.ToolTip="AI Tools">
+                                    Style="{StaticResource DarkRectButtonStyle}">
                                 <TextBlock Text="AI" FontSize="16" FontWeight="Bold" Foreground="White"/>
                                 <Button.Flyout>
                                     <MenuFlyout Placement="BottomEdgeAlignedLeft">
