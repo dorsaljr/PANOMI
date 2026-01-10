@@ -214,7 +214,10 @@ public sealed partial class MainWindow : Window
         WebStoresMenu.Text = Loc.Get("WebStores");
         WebSupportMenu.Text = Loc.Get("WebSupport");
         
-        // Chinese platforms submenu
+        // Chinese platforms submenu - only visible for Chinese language users
+        WebChineseMenu.Visibility = Loc.CurrentLanguage == "zh-CN" 
+            ? Microsoft.UI.Xaml.Visibility.Visible 
+            : Microsoft.UI.Xaml.Visibility.Collapsed;
         WebChineseMenu.Text = Loc.Get("WebChinese");
         WebBaidu.Text = Loc.Get("WebBaidu");
         WebBilibili.Text = Loc.Get("WebBilibili");
