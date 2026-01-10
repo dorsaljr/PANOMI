@@ -214,22 +214,6 @@ public sealed partial class MainWindow : Window
         WebStoresMenu.Text = Loc.Get("WebStores");
         WebSupportMenu.Text = Loc.Get("WebSupport");
         
-        // Chinese platforms submenu - only visible for Chinese language users
-        WebChineseMenu.Visibility = Loc.CurrentLanguage == "zh-CN" 
-            ? Microsoft.UI.Xaml.Visibility.Visible 
-            : Microsoft.UI.Xaml.Visibility.Collapsed;
-        WebChineseMenu.Text = Loc.Get("WebChinese");
-        WebBaidu.Text = Loc.Get("WebBaidu");
-        WebBilibili.Text = Loc.Get("WebBilibili");
-        WebDouyin.Text = Loc.Get("WebDouyin");
-        WebIQIYI.Text = Loc.Get("WebIQIYI");
-        WebMangoTV.Text = Loc.Get("WebMangoTV");
-        WebTencentVideo.Text = Loc.Get("WebTencentVideo");
-        WebWeChat.Text = Loc.Get("WebWeChat");
-        WebWeibo.Text = Loc.Get("WebWeibo");
-        WebXiaohongshu.Text = Loc.Get("WebXiaohongshu");
-        WebYouku.Text = Loc.Get("WebYouku");
-        
         // Update Launch button text on all items
         var launchText = Loc.Get("LaunchButton");
         foreach (var item in _allItems)
