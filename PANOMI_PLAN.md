@@ -33,11 +33,7 @@ PANOMI is a lightweight, offline-first Windows game launcher aggregator that con
 | Rockstar | ✅ Complete | Registry + configs |
 | Riot Games | ✅ Complete | Registry + configs |
 | Minecraft | ✅ Complete | Registry + JSON |
-| Amazon Games | ✅ Complete | Registry + SQLite DB |
-| itch.io | ✅ Complete | Registry + database |
-| IndieGala | ✅ Complete | AppData configs |
-| Legacy Games | ✅ Complete | Registry |
-| Chinese Platforms | ✅ Complete | WeGame, Bilibili, Tencent |
+| Roblox | ✅ Complete | Registry |
 
 ---
 
