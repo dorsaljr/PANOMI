@@ -214,18 +214,21 @@ public sealed partial class MainWindow : Window
         WebStoresMenu.Text = Loc.Get("WebStores");
         WebSupportMenu.Text = Loc.Get("WebSupport");
         
-        // Update Launch button text on all items
-        var launchText = Loc.Get("LaunchButton");
-        foreach (var item in _allItems)
-        {
-            item.LaunchText = launchText;
-        }
-        
-        // Update launching button if one is active
-        if (_launchingButton != null)
-        {
-            _launchingButton.LaunchText = Loc.Get("LaunchingButton");
-        }
+        // Chinese Platforms - only visible for zh-CN
+        WebChineseMenu.Text = Loc.Get("WebChinese");
+        WebBaidu.Text = Loc.Get("WebBaidu");
+        WebBilibili.Text = Loc.Get("WebBilibili");
+        WebDouyin.Text = Loc.Get("WebDouyin");
+        WebIQIYI.Text = Loc.Get("WebIQIYI");
+        WebMangoTV.Text = Loc.Get("WebMangoTV");
+        WebTencentVideo.Text = Loc.Get("WebTencentVideo");
+        WebWeChat.Text = Loc.Get("WebWeChat");
+        WebWeibo.Text = Loc.Get("WebWeibo");
+        WebXiaohongshu.Text = Loc.Get("WebXiaohongshu");
+        WebYouku.Text = Loc.Get("WebYouku");
+        WebChineseMenu.Visibility = Loc.CurrentLanguage == "zh-CN" 
+            ? Microsoft.UI.Xaml.Visibility.Visible 
+            : Microsoft.UI.Xaml.Visibility.Collapsed;
     }
     
     private void LoadAppSettings()
@@ -1513,10 +1516,10 @@ public sealed partial class MainWindow : Window
     {
         if (sender is Button button && button.Tag is LibraryItem item)
         {
-            // Visual feedback: change to "Launching..." with cyan style
-            // Update item.LaunchText to preserve binding (so language changes work)
+            // Visual feedback: change to loading icon with cyan style
             var originalStyle = button.Style;
-            item.LaunchText = Loc.Get("LaunchingButton");
+            var originalContent = button.Content;
+            button.Content = new ProgressRing { IsActive = true, Width = 16, Height = 16, Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 0, 188, 212)) };
             button.Style = (Style)Application.Current.Resources["CyanPillButtonStyle"];
             button.IsEnabled = false;
             _launchingButton = item; // Track item for language updates
@@ -1554,21 +1557,65 @@ public sealed partial class MainWindow : Window
                     await _gameService.TryLaunchGameAsync(item.Id);
                 }
                 
-                // Delay so user sees "Launching..." feedback while app opens
+                // Delay so user sees loading feedback while app opens
                 await Task.Delay(3000);
             }
             catch { }
             finally
             {
-                // Restore button - update LaunchText to preserve binding
+                // Restore button
                 _launchingButton = null;
-                item.LaunchText = Loc.Get("LaunchButton");
+                button.Content = originalContent;
                 button.Style = originalStyle;
                 button.IsEnabled = true;
                 
                 // Restore focus to the button
                 button.Focus(FocusState.Keyboard);
             }
+        }
+    }
+    
+    private void GameName_Loaded(object sender, RoutedEventArgs e)
+    {
+        UpdateGameNameTooltip(sender as TextBlock);
+    }
+    
+    private void GameName_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        UpdateGameNameTooltip(sender as TextBlock);
+    }
+    
+    private void UpdateGameNameTooltip(TextBlock? textBlock)
+    {
+        if (textBlock == null) return;
+        // Only show tooltip when text is actually trimmed (ellipsis shown)
+        if (textBlock.IsTextTrimmed)
+        {
+            // Create styled tooltip if not already set
+            if (ToolTipService.GetToolTip(textBlock) == null)
+            {
+                var tooltip = new ToolTip
+                {
+                    Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 15, 17, 20)),
+                    BorderBrush = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 42, 42, 47)),
+                    BorderThickness = new Thickness(1),
+                    CornerRadius = new CornerRadius(8),
+                    Padding = new Thickness(12, 8, 12, 8),
+                    Content = new TextBlock
+                    {
+                        Text = textBlock.Text,
+                        Foreground = new SolidColorBrush(Colors.White),
+                        FontSize = 12,
+                        TextWrapping = TextWrapping.Wrap,
+                        MaxWidth = 400
+                    }
+                };
+                ToolTipService.SetToolTip(textBlock, tooltip);
+            }
+        }
+        else
+        {
+            ToolTipService.SetToolTip(textBlock, null);
         }
     }
     

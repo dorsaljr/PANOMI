@@ -14,8 +14,6 @@ public static class Loc
         ["en-US"] = new()
         {
             ["ScanButton"] = "Scan Launchers & Games",
-            ["LaunchButton"] = "Launch",
-            ["LaunchingButton"] = "Launching...",
             ["Library"] = "Library",
             ["FilterAll"] = "All",
             ["FilterLaunchers"] = "Launchers",
@@ -57,8 +55,6 @@ public static class Loc
         ["es"] = new()
         {
             ["ScanButton"] = "Buscar Lanzadores y Juegos",
-            ["LaunchButton"] = "Iniciar",
-            ["LaunchingButton"] = "Iniciando...",
             ["Library"] = "Biblioteca",
             ["FilterAll"] = "Todos",
             ["FilterLaunchers"] = "Lanzadores",
@@ -89,8 +85,6 @@ public static class Loc
         ["pt-BR"] = new()
         {
             ["ScanButton"] = "Buscar Inicializadores e Jogos",
-            ["LaunchButton"] = "Iniciar",
-            ["LaunchingButton"] = "Iniciando...",
             ["Library"] = "Biblioteca",
             ["FilterAll"] = "Todos",
             ["FilterLaunchers"] = "Inicializadores",
@@ -121,8 +115,6 @@ public static class Loc
         ["fr"] = new()
         {
             ["ScanButton"] = "Rechercher Lanceurs et Jeux",
-            ["LaunchButton"] = "Lancer",
-            ["LaunchingButton"] = "Lancement...",
             ["Library"] = "Bibliothèque",
             ["FilterAll"] = "Tous",
             ["FilterLaunchers"] = "Lanceurs",
@@ -153,8 +145,6 @@ public static class Loc
         ["de"] = new()
         {
             ["ScanButton"] = "Starter und Spiele suchen",
-            ["LaunchButton"] = "Starten",
-            ["LaunchingButton"] = "Starten...",
             ["Library"] = "Bibliothek",
             ["FilterAll"] = "Alle",
             ["FilterLaunchers"] = "Starter",
@@ -185,8 +175,6 @@ public static class Loc
         ["it"] = new()
         {
             ["ScanButton"] = "Cerca Avviatori e Giochi",
-            ["LaunchButton"] = "Avvia",
-            ["LaunchingButton"] = "Avvio...",
             ["Library"] = "Libreria",
             ["FilterAll"] = "Tutti",
             ["FilterLaunchers"] = "Avviatori",
@@ -217,8 +205,6 @@ public static class Loc
         ["ko"] = new()
         {
             ["ScanButton"] = "런처 및 게임 검색",
-            ["LaunchButton"] = "실행",
-            ["LaunchingButton"] = "실행 중...",
             ["Library"] = "라이브러리",
             ["FilterAll"] = "전체",
             ["FilterLaunchers"] = "런처",
@@ -249,8 +235,6 @@ public static class Loc
         ["ja"] = new()
         {
             ["ScanButton"] = "ランチャーとゲームをスキャン",
-            ["LaunchButton"] = "起動",
-            ["LaunchingButton"] = "起動中...",
             ["Library"] = "ライブラリ",
             ["FilterAll"] = "すべて",
             ["FilterLaunchers"] = "ランチャー",
@@ -281,8 +265,6 @@ public static class Loc
         ["zh-CN"] = new()
         {
             ["ScanButton"] = "扫描启动器和游戏",
-            ["LaunchButton"] = "启动",
-            ["LaunchingButton"] = "启动中...",
             ["Library"] = "游戏库",
             ["FilterAll"] = "全部",
             ["FilterLaunchers"] = "启动器",
@@ -324,8 +306,6 @@ public static class Loc
         ["hi"] = new()
         {
             ["ScanButton"] = "लॉन्चर और गेम खोजें",
-            ["LaunchButton"] = "शुरू करें",
-            ["LaunchingButton"] = "लॉन्च हो रहा है...",
             ["Library"] = "लाइब्रेरी",
             ["FilterAll"] = "सभी",
             ["FilterLaunchers"] = "लॉन्चर",
@@ -356,8 +336,6 @@ public static class Loc
         ["ru"] = new()
         {
             ["ScanButton"] = "Поиск лаунчеров и игр",
-            ["LaunchButton"] = "Запустить",
-            ["LaunchingButton"] = "Запуск...",
             ["Library"] = "Библиотека",
             ["FilterAll"] = "Все",
             ["FilterLaunchers"] = "Лаунчеры",
@@ -388,8 +366,6 @@ public static class Loc
         ["pl"] = new()
         {
             ["ScanButton"] = "Skanuj programy i gry",
-            ["LaunchButton"] = "Uruchom",
-            ["LaunchingButton"] = "Uruchamianie...",
             ["Library"] = "Biblioteka",
             ["FilterAll"] = "Wszystkie",
             ["FilterLaunchers"] = "Programy",
@@ -420,8 +396,6 @@ public static class Loc
         ["tr"] = new()
         {
             ["ScanButton"] = "Başlatıcıları ve Oyunları Tara",
-            ["LaunchButton"] = "Başlat",
-            ["LaunchingButton"] = "Başlatılıyor...",
             ["Library"] = "Kütüphane",
             ["FilterAll"] = "Tümü",
             ["FilterLaunchers"] = "Başlatıcılar",
@@ -452,8 +426,6 @@ public static class Loc
         ["ar"] = new()
         {
             ["ScanButton"] = "بحث عن المشغلات والألعاب",
-            ["LaunchButton"] = "تشغيل",
-            ["LaunchingButton"] = "جاري التشغيل...",
             ["Library"] = "المكتبة",
             ["FilterAll"] = "الكل",
             ["FilterLaunchers"] = "المشغلات",
@@ -484,8 +456,6 @@ public static class Loc
         ["ur"] = new()
         {
             ["ScanButton"] = "لانچرز اور گیمز تلاش کریں",
-            ["LaunchButton"] = "شروع کریں",
-            ["LaunchingButton"] = "شروع ہو رہا ہے...",
             ["Library"] = "لائبریری",
             ["FilterAll"] = "سب",
             ["FilterLaunchers"] = "لانچرز",
@@ -516,8 +486,6 @@ public static class Loc
         ["uk"] = new()
         {
             ["ScanButton"] = "Сканувати лаунчери та ігри",
-            ["LaunchButton"] = "Запустити",
-            ["LaunchingButton"] = "Запуск...",
             ["Library"] = "Бібліотека",
             ["FilterAll"] = "Все",
             ["FilterLaunchers"] = "Лаунчери",
@@ -548,8 +516,6 @@ public static class Loc
         ["id"] = new()
         {
             ["ScanButton"] = "Pindai Peluncur & Permainan",
-            ["LaunchButton"] = "Jalankan",
-            ["LaunchingButton"] = "Memulai...",
             ["Library"] = "Perpustakaan",
             ["FilterAll"] = "Semua",
             ["FilterLaunchers"] = "Peluncur",
@@ -580,8 +546,6 @@ public static class Loc
         ["vi"] = new()
         {
             ["ScanButton"] = "Quét Trình khởi chạy & Trò chơi",
-            ["LaunchButton"] = "Khởi chạy",
-            ["LaunchingButton"] = "Đang khởi chạy...",
             ["Library"] = "Thư viện",
             ["FilterAll"] = "Tất cả",
             ["FilterLaunchers"] = "Trình khởi chạy",
@@ -612,8 +576,6 @@ public static class Loc
         ["th"] = new()
         {
             ["ScanButton"] = "สแกนตัวเปิดและเกม",
-            ["LaunchButton"] = "เริ่ม",
-            ["LaunchingButton"] = "กำลังเริ่ม...",
             ["Library"] = "คลังเกม",
             ["FilterAll"] = "ทั้งหมด",
             ["FilterLaunchers"] = "ตัวเปิด",
@@ -642,8 +604,6 @@ public static class Loc
         ["fa"] = new()
         {
             ["ScanButton"] = "اسکن لانچرها و بازی‌ها",
-            ["LaunchButton"] = "اجرا",
-            ["LaunchingButton"] = "در حال اجرا...",
             ["Library"] = "کتابخانه",
             ["FilterAll"] = "همه",
             ["FilterLaunchers"] = "لانچرها",
@@ -674,8 +634,6 @@ public static class Loc
         ["bn"] = new()
         {
             ["ScanButton"] = "লঞ্চার ও গেম স্ক্যান করুন",
-            ["LaunchButton"] = "চালু করুন",
-            ["LaunchingButton"] = "চালু হচ্ছে...",
             ["Library"] = "লাইব্রেরি",
             ["FilterAll"] = "সব",
             ["FilterLaunchers"] = "লঞ্চার",
@@ -704,8 +662,6 @@ public static class Loc
         ["sw"] = new()
         {
             ["ScanButton"] = "Tafuta Vizindua na Michezo",
-            ["LaunchButton"] = "Anzisha",
-            ["LaunchingButton"] = "Inaanzisha...",
             ["Library"] = "Maktaba",
             ["FilterAll"] = "Zote",
             ["FilterLaunchers"] = "Vizindua",
@@ -736,8 +692,6 @@ public static class Loc
         ["el"] = new()
         {
             ["ScanButton"] = "Σάρωση Εκκινητών & Παιχνιδιών",
-            ["LaunchButton"] = "Εκκίνηση",
-            ["LaunchingButton"] = "Εκκίνηση...",
             ["Library"] = "Βιβλιοθήκη",
             ["FilterAll"] = "Όλα",
             ["FilterLaunchers"] = "Εκκινητές",
@@ -768,8 +722,6 @@ public static class Loc
         ["ro"] = new()
         {
             ["ScanButton"] = "Scanează Lansatoare și Jocuri",
-            ["LaunchButton"] = "Lansează",
-            ["LaunchingButton"] = "Se lansează...",
             ["Library"] = "Bibliotecă",
             ["FilterAll"] = "Toate",
             ["FilterLaunchers"] = "Lansatoare",
@@ -800,8 +752,6 @@ public static class Loc
         ["cs"] = new()
         {
             ["ScanButton"] = "Hledat spouštěče a hry",
-            ["LaunchButton"] = "Spustit",
-            ["LaunchingButton"] = "Spouštění...",
             ["Library"] = "Knihovna",
             ["FilterAll"] = "Vše",
             ["FilterLaunchers"] = "Spouštěče",
@@ -832,8 +782,6 @@ public static class Loc
         ["sr"] = new()
         {
             ["ScanButton"] = "Скенирај покретаче и игре",
-            ["LaunchButton"] = "Покрени",
-            ["LaunchingButton"] = "Покретање...",
             ["Library"] = "Библиотека",
             ["FilterAll"] = "Све",
             ["FilterLaunchers"] = "Покретачи",
@@ -864,8 +812,6 @@ public static class Loc
         ["nl"] = new()
         {
             ["ScanButton"] = "Launchers en games scannen",
-            ["LaunchButton"] = "Starten",
-            ["LaunchingButton"] = "Starten...",
             ["Library"] = "Bibliotheek",
             ["FilterAll"] = "Alles",
             ["FilterLaunchers"] = "Launchers",
@@ -896,8 +842,6 @@ public static class Loc
         ["sq"] = new()
         {
             ["ScanButton"] = "Skano Lançuesit dhe Lojërat",
-            ["LaunchButton"] = "Fillo",
-            ["LaunchingButton"] = "Duke filluar...",
             ["Library"] = "Biblioteka",
             ["FilterAll"] = "Të gjitha",
             ["FilterLaunchers"] = "Lançuesit",
@@ -928,8 +872,6 @@ public static class Loc
         ["fil"] = new()
         {
             ["ScanButton"] = "I-scan ang mga Launcher at Laro",
-            ["LaunchButton"] = "Ilunsad",
-            ["LaunchingButton"] = "Inilulunsad...",
             ["Library"] = "Aklatan",
             ["FilterAll"] = "Lahat",
             ["FilterLaunchers"] = "Mga Launcher",

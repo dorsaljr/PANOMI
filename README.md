@@ -40,7 +40,7 @@ PANOMI reads Windows registry entries and launcher configuration files to detect
 
 ## Download
 
-Get the latest release from [GitHub Releases](https://github.com/dorsaljr/PANOMI_BETA/releases) or visit [panomi.org](https://panomi.org).
+Get the latest release from [GitHub Releases](https://github.com/dorsaljr/PANOMI_BETA/releases).
 
 ## Building from Source
 
@@ -75,7 +75,7 @@ Some links may be affiliate links, which help support PANOMI at no extra cost to
 
 ## Links
 
-- [Website](https://panomi.org)
+- [Download](https://dorsaljr.github.io/PANOMI_BETA/)
 - [Linktree](https://linktr.ee/panomiltd)
 - [GitHub](https://github.com/dorsaljr/PANOMI_BETA)
 

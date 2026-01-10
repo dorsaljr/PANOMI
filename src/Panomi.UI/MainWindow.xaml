@@ -96,6 +96,20 @@
                                             </Style>
                                         </MenuFlyout.MenuFlyoutPresenterStyle>
                                         
+                                        <!-- Chinese Platforms (only visible for zh-CN) -->
+                                        <MenuFlyoutSubItem x:Name="WebChineseMenu" Text="Chinese Platforms" Foreground="White" Visibility="Collapsed">
+                                            <MenuFlyoutItem x:Name="WebBaidu" Text="Baidu Tieba" Click="WebLink_Click" Tag="https://tieba.baidu.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebBilibili" Text="Bilibili" Click="WebLink_Click" Tag="https://www.bilibili.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebDouyin" Text="Douyin" Click="WebLink_Click" Tag="https://www.douyin.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebIQIYI" Text="iQIYI" Click="WebLink_Click" Tag="https://www.iqiyi.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebMangoTV" Text="Mango TV" Click="WebLink_Click" Tag="https://www.mgtv.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebTencentVideo" Text="Tencent Video" Click="WebLink_Click" Tag="https://v.qq.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebWeChat" Text="WeChat" Click="WebLink_Click" Tag="https://weixin.qq.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebWeibo" Text="Weibo" Click="WebLink_Click" Tag="https://weibo.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebXiaohongshu" Text="Xiaohongshu" Click="WebLink_Click" Tag="https://www.xiaohongshu.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebYouku" Text="Youku" Click="WebLink_Click" Tag="https://www.youku.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
                                         <!-- Console (alphabetical) -->
                                         <MenuFlyoutSubItem x:Name="WebConsoleMenu" Text="Console" Foreground="White">
                                             <MenuFlyoutItem x:Name="WebNintendo" Text="Nintendo" Click="WebLink_Click" Tag="https://www.nintendo.com" Foreground="White"/>
@@ -313,10 +327,13 @@
                                                 HorizontalContentAlignment="Left"
                                                 Background="Transparent" 
                                                 Foreground="White" 
-                                                Padding="4,6,4,6"
+                                                Padding="0,6,4,6"
                                                 BorderThickness="0">
                                             <Button.Content>
-                                                <TextBlock x:Name="LanguageText" Text="Language" Foreground="White" VerticalAlignment="Center"/>
+                                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                                    <TextBlock Text="🌍" FontSize="16" VerticalAlignment="Center"/>
+                                                    <TextBlock x:Name="LanguageText" Text="Language" Foreground="White" VerticalAlignment="Center"/>
+                                                </StackPanel>
                                             </Button.Content>
                                             <Button.Flyout>
                                                 <Flyout x:Name="LanguageFlyout" Placement="LeftEdgeAlignedTop" Closed="LanguageFlyout_Closed">
@@ -351,75 +368,81 @@
                     <ItemsRepeater.Layout>
                         <UniformGridLayout Orientation="Horizontal" 
                                            MinItemWidth="300"
-                                           MinItemHeight="145"
-                                           MinRowSpacing="16"
+                                           MinItemHeight="56"
+                                           MinRowSpacing="8"
                                            MinColumnSpacing="16"
                                            ItemsStretch="Fill"
                                            ItemsJustification="Start"/>
                     </ItemsRepeater.Layout>
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate>
-                            <Border CornerRadius="16" Background="#0f1114" Height="145">
+                            <Border CornerRadius="12" Background="#0f1114" Padding="12,8">
                                 <Grid>
-                                    <!-- Name with optional icon -->
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="16,20,48,0">
-                                        <!-- Launcher icon (native, no border) for launchers with icons -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon column -->
+                                    <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                                        <!-- Launcher icon (native, no border) -->
                                         <Image Source="{Binding LauncherIcon}" Width="28" Height="28"
-                                               Margin="0,0,10,0"
                                                Visibility="{Binding HasLauncherIcon, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                         <!-- Rounded square icon for games -->
-                                        <Border Width="28" Height="28" CornerRadius="6" 
-                                                Margin="0,0,10,0"
+                                        <Border Width="28" Height="28" CornerRadius="6"
                                                 Visibility="{Binding GameIcon, Converter={StaticResource NullToCollapsedConverter}}">
                                             <Border.Background>
                                                 <ImageBrush ImageSource="{Binding GameIcon}" Stretch="UniformToFill"/>
                                             </Border.Background>
                                         </Border>
-                                        <!-- Panomi logo fallback for games without icons -->
-                                        <Grid Width="28" Height="28" Margin="0,0,10,0" CornerRadius="6"
+                                        <!-- Panomi logo fallback -->
+                                        <Grid Width="28" Height="28" CornerRadius="6"
                                               Visibility="{Binding ShowFallbackIcon, Converter={StaticResource BoolToVisibilityConverter}}">
                                             <Image Source="ms-appx:///Assets/logo_png.png" Stretch="UniformToFill"/>
                                         </Grid>
-                                        <FontIcon Glyph="{Binding TitleGlyph}" FontSize="18" Foreground="White" 
-                                                  Margin="0,0,6,0" VerticalAlignment="Center"
+                                        <FontIcon Glyph="{Binding TitleGlyph}" FontSize="18" Foreground="White"
                                                   Visibility="{Binding HasTitleGlyph, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                                        <StackPanel VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Name}" Foreground="White" 
-                                                       FontSize="16" FontWeight="SemiBold"
-                                                       TextWrapping="Wrap" MaxLines="2"/>
-                                            <TextBlock Text="{Binding LauncherName}" Foreground="#888" 
-                                                       FontSize="12"
-                                                       Visibility="{Binding HasMultipleLaunchers, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    <!-- Title column -->
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,8,0">
+                                        <TextBlock Text="{Binding Name}" Foreground="White" 
+                                                   FontSize="14" FontWeight="SemiBold"
+                                                   TextTrimming="CharacterEllipsis" MaxLines="1"
+                                                   Loaded="GameName_Loaded"
+                                                   SizeChanged="GameName_SizeChanged"/>
+                                        <TextBlock Text="{Binding LauncherName}" Foreground="#888" 
+                                                   FontSize="11"
+                                                   Visibility="{Binding HasMultipleLaunchers, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                     </StackPanel>
                                     
-                                    <Grid VerticalAlignment="Bottom" Margin="12,0,12,12">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <Button Content="{Binding LaunchText}" 
-                                                Click="LaunchItem_Click"
-                                                Tag="{Binding}"
-                                                Grid.Column="0"
-                                                HorizontalAlignment="Stretch" 
-                                                Padding="0,12"
-                                                Style="{StaticResource CyanLaunchButtonStyle}"
-                                                Margin="0,0,8,0"/>
-                                        
-                                        <Button Click="FavoriteItem_Click"
-                                                Tag="{Binding}"
-                                                Grid.Column="1"
-                                                Width="44" Height="44"
-                                                Padding="0"
-                                                CornerRadius="10"
-                                                Background="#1a1a1f">
-                                            <FontIcon Glyph="{Binding FavoriteIcon}" 
-                                                      FontSize="18"
-                                                      Foreground="{Binding IsFavorite, Converter={StaticResource BoolToFavoriteColorConverter}}"/>
-                                        </Button>
-                                    </Grid>
+                                    <!-- Play button -->
+                                    <Button x:Name="LaunchButton"
+                                            Click="LaunchItem_Click"
+                                            Tag="{Binding}"
+                                            Grid.Column="2"
+                                            Width="36" Height="36"
+                                            Padding="0"
+                                            CornerRadius="8"
+                                            Style="{StaticResource CyanLaunchButtonStyle}"
+                                            Margin="0,0,6,0">
+                                        <FontIcon Glyph="&#xE768;" FontSize="14"/>
+                                    </Button>
+                                    
+                                    <!-- Favorite button -->
+                                    <Button Click="FavoriteItem_Click"
+                                            Tag="{Binding}"
+                                            Grid.Column="3"
+                                            Width="36" Height="36"
+                                            Padding="0"
+                                            CornerRadius="8"
+                                            Background="#1a1a1f">
+                                        <FontIcon Glyph="{Binding FavoriteIcon}" 
+                                                  FontSize="16"
+                                                  Foreground="{Binding IsFavorite, Converter={StaticResource BoolToFavoriteColorConverter}}"/>
+                                    </Button>
                                 </Grid>
                             </Border>
                         </DataTemplate>
