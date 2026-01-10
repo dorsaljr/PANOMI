@@ -198,6 +198,9 @@ public sealed partial class MainWindow : Window
         StatLaunchersLabel.Text = Loc.Get("StatLaunchers");
         StatGamesLabel.Text = Loc.Get("StatGames");
         
+        // Update button
+        UpdateButtonText.Text = Loc.Get("UpdateAvailable");
+        
         // Library header
         LibraryHeader.Text = Loc.Get("Library");
         
