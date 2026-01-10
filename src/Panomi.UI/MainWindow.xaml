@@ -187,7 +187,7 @@
                             <Button x:Name="UpdateButton" Click="UpdateButton_Click"
                                     Visibility="Collapsed"
                                     Style="{StaticResource DarkRectButtonStyle}">
-                                <TextBlock x:Name="UpdateButtonText" Text="Update Available" FontSize="14" Foreground="#4ade80"/>
+                                <TextBlock x:Name="UpdateButtonText" FontSize="14" Foreground="#4ade80"/>
                             </Button>
                         </StackPanel>
                     </StackPanel>
