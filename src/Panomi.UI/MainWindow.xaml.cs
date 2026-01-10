@@ -49,6 +49,9 @@ public sealed partial class MainWindow : Window
     // Tray icon settings
     private TaskbarIcon? _trayIcon;
     
+    // Reset filters button reference for language updates
+    private Button? _resetFiltersButton;
+    
     /// <summary>
     /// Normalizes a game name for duplicate detection by removing trademark symbols,
     /// normalizing whitespace, and converting to lowercase.
@@ -229,6 +232,12 @@ public sealed partial class MainWindow : Window
         WebChineseMenu.Visibility = Loc.CurrentLanguage == "zh-CN" 
             ? Microsoft.UI.Xaml.Visibility.Visible 
             : Microsoft.UI.Xaml.Visibility.Collapsed;
+        
+        // Reset filters button (dynamically created)
+        if (_resetFiltersButton != null)
+        {
+            _resetFiltersButton.Content = Loc.Get("ResetFilters");
+        }
     }
     
     private void LoadAppSettings()
@@ -928,7 +937,7 @@ public sealed partial class MainWindow : Window
         SourceFilterPanel.Children.Clear();
         
         // Add "Reset filters" button at top
-        var resetButton = new Button
+        _resetFiltersButton = new Button
         {
             Content = Loc.Get("ResetFilters"),
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -938,8 +947,8 @@ public sealed partial class MainWindow : Window
             Padding = new Thickness(12, 8, 12, 8),
             CornerRadius = new CornerRadius(6)
         };
-        resetButton.Click += ResetFilters_Click;
-        SourceFilterPanel.Children.Add(resetButton);
+        _resetFiltersButton.Click += ResetFilters_Click;
+        SourceFilterPanel.Children.Add(_resetFiltersButton);
         
         // Add separator
         var separator = new Border

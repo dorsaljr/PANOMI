@@ -128,6 +128,7 @@
                                         <MenuFlyoutSubItem x:Name="WebMiscMenu" Text="Misc" Foreground="White">
                                             <MenuFlyoutItem x:Name="WebGitHub" Text="GitHub" Click="WebLink_Click" Tag="https://www.github.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebGoogle" Text="Google" Click="WebLink_Click" Tag="https://www.google.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebItchIo" Text="itch.io" Click="WebLink_Click" Tag="https://itch.io" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebWikipedia" Text="Wikipedia" Click="WebLink_Click" Tag="https://www.wikipedia.org" Foreground="White"/>
                                             <MenuFlyoutSubItem x:Name="WebFilmDatabasesMenu" Text="Film Databases" Foreground="White">
                                                 <MenuFlyoutItem x:Name="WebBoxOfficeMojo" Text="Box Office Mojo" Click="WebLink_Click" Tag="https://www.boxofficemojo.com" Foreground="White"/>
