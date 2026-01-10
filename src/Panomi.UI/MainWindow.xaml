@@ -110,23 +110,25 @@
                                             <MenuFlyoutItem x:Name="WebTwitch" Text="Twitch" Click="WebLink_Click" Tag="https://www.twitch.tv" Foreground="White"/>
                                         </MenuFlyoutSubItem>
                                         
+                                        <!-- Chinese Platforms (only visible when language is Chinese) -->
+                                        <MenuFlyoutSubItem x:Name="WebChineseMenu" Text="Chinese Platforms" Foreground="White" Visibility="Collapsed">
+                                            <MenuFlyoutItem x:Name="WebBaidu" Text="Baidu Tieba" Click="WebLink_Click" Tag="https://tieba.baidu.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebBilibili" Text="Bilibili" Click="WebLink_Click" Tag="https://www.bilibili.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebDouyin" Text="Douyin" Click="WebLink_Click" Tag="https://www.douyin.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebIQIYI" Text="iQIYI" Click="WebLink_Click" Tag="https://www.iqiyi.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebMangoTV" Text="Mango TV" Click="WebLink_Click" Tag="https://www.mgtv.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebTencentVideo" Text="Tencent Video" Click="WebLink_Click" Tag="https://v.qq.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebWeChat" Text="WeChat" Click="WebLink_Click" Tag="https://weixin.qq.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebWeibo" Text="Weibo" Click="WebLink_Click" Tag="https://weibo.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebXiaohongshu" Text="Xiaohongshu" Click="WebLink_Click" Tag="https://www.xiaohongshu.com" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebYouku" Text="Youku" Click="WebLink_Click" Tag="https://www.youku.com" Foreground="White"/>
+                                        </MenuFlyoutSubItem>
+                                        
                                         <!-- Misc (alphabetical) -->
                                         <MenuFlyoutSubItem x:Name="WebMiscMenu" Text="Misc" Foreground="White">
                                             <MenuFlyoutItem x:Name="WebGitHub" Text="GitHub" Click="WebLink_Click" Tag="https://www.github.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebGoogle" Text="Google" Click="WebLink_Click" Tag="https://www.google.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebWikipedia" Text="Wikipedia" Click="WebLink_Click" Tag="https://www.wikipedia.org" Foreground="White"/>
-                                            <MenuFlyoutSubItem x:Name="WebChineseMenu" Text="Chinese Platforms" Foreground="White">
-                                                <MenuFlyoutItem x:Name="WebBaidu" Text="Baidu Tieba" Click="WebLink_Click" Tag="https://tieba.baidu.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebBilibili" Text="Bilibili" Click="WebLink_Click" Tag="https://www.bilibili.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebDouyin" Text="Douyin" Click="WebLink_Click" Tag="https://www.douyin.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebIQIYI" Text="iQIYI" Click="WebLink_Click" Tag="https://www.iqiyi.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebMangoTV" Text="Mango TV" Click="WebLink_Click" Tag="https://www.mgtv.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebTencentVideo" Text="Tencent Video" Click="WebLink_Click" Tag="https://v.qq.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebWeChat" Text="WeChat" Click="WebLink_Click" Tag="https://weixin.qq.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebWeibo" Text="Weibo" Click="WebLink_Click" Tag="https://weibo.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebXiaohongshu" Text="Xiaohongshu" Click="WebLink_Click" Tag="https://www.xiaohongshu.com" Foreground="White"/>
-                                                <MenuFlyoutItem x:Name="WebYouku" Text="Youku" Click="WebLink_Click" Tag="https://www.youku.com" Foreground="White"/>
-                                            </MenuFlyoutSubItem>
                                             <MenuFlyoutSubItem x:Name="WebFilmDatabasesMenu" Text="Film Databases" Foreground="White">
                                                 <MenuFlyoutItem x:Name="WebBoxOfficeMojo" Text="Box Office Mojo" Click="WebLink_Click" Tag="https://www.boxofficemojo.com" Foreground="White"/>
                                                 <MenuFlyoutItem x:Name="WebIMDB" Text="IMDB" Click="WebLink_Click" Tag="https://www.imdb.com" Foreground="White"/>
