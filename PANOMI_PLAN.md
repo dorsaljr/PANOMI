@@ -1,7 +1,5 @@
 # PANOMI - Project Status
 
-> **Last Updated:** v1.4.1 (June 2025)
-
 ## Overview
 PANOMI is a lightweight, offline-first Windows game launcher aggregator that consolidates PC game libraries into one unified interface using local file/registry scanning.
 
@@ -73,7 +71,6 @@ PANOMI/
 - ✅ **Icon extraction**: From user's own installed executables (legal)
 - ✅ **SQLite**: Local database for game library persistence
 - ✅ **Velopack**: Replaced MSIX for simpler distribution
-- ✅ **Azure Trusted Signing**: Professional code signing
 - ✅ **Direct download**: Single exe installer from GitHub Releases
 - ❌ **No Xbox/Game Pass**: Too complex, different ecosystem
 - ❌ **No background service**: Manual refresh only

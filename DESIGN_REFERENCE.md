@@ -1,7 +1,5 @@
 # PANOMI UI Design Reference
 
-## Current Version: 1.4.1
-
 A unified game launcher that detects and organizes all your games and launchers in one place.
 
 ---
@@ -69,4 +67,3 @@ English, Español, Português, Français, Deutsch, Italiano, 한국어, 日本�
 2. **Minimal UI** - Play icon (▶) instead of "Launch" text
 3. **Dark theme** - Gaming aesthetic
 4. **Privacy first** - No telemetry, no accounts, local only
-5. **Signed & Certified** - Microsoft Azure Trusted Signing
