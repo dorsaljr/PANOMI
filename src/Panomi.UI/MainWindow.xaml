@@ -130,6 +130,11 @@
                                             <MenuFlyoutItem x:Name="WebGoogle" Text="Google" Click="WebLink_Click" Tag="https://www.google.com" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebItchIo" Text="itch.io" Click="WebLink_Click" Tag="https://itch.io" Foreground="White"/>
                                             <MenuFlyoutItem x:Name="WebWikipedia" Text="Wikipedia" Click="WebLink_Click" Tag="https://www.wikipedia.org" Foreground="White"/>
+                                            <MenuFlyoutSubItem x:Name="WebBooksMenu" Text="Books" Foreground="White">
+                                                <MenuFlyoutItem x:Name="WebAudible" Text="Audible" Click="WebLink_Click" Tag="https://www.audible.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebKindle" Text="Kindle" Click="WebLink_Click" Tag="https://read.amazon.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebMarvelComics" Text="Marvel Comics" Click="WebLink_Click" Tag="https://www.marvel.com/comics" Foreground="White"/>
+                                            </MenuFlyoutSubItem>
                                             <MenuFlyoutSubItem x:Name="WebFilmDatabasesMenu" Text="Film Databases" Foreground="White">
                                                 <MenuFlyoutItem x:Name="WebBoxOfficeMojo" Text="Box Office Mojo" Click="WebLink_Click" Tag="https://www.boxofficemojo.com" Foreground="White"/>
                                                 <MenuFlyoutItem x:Name="WebIMDB" Text="IMDB" Click="WebLink_Click" Tag="https://www.imdb.com" Foreground="White"/>
@@ -172,9 +177,15 @@
                                         
                                         <!-- Stores -->
                                         <MenuFlyoutSubItem x:Name="WebStoresMenu" Text="Stores" Foreground="White">
-                                            <MenuFlyoutItem x:Name="WebAmazonUK" Text="Amazon UK" Click="WebLink_Click" Tag="https://www.amazon.co.uk?tag=panomiuk-21" Foreground="White"/>
-                                            <MenuFlyoutItem x:Name="WebAmazonUS" Text="Amazon US" Click="WebLink_Click" Tag="https://www.amazon.com?tag=panomi-20" Foreground="White"/>
-                                            <MenuFlyoutItem x:Name="WebHumbleBundle" Text="Humble Bundle" Click="WebLink_Click" Tag="https://www.humblebundle.com" Foreground="White"/>
+                                            <MenuFlyoutSubItem x:Name="WebStoresAmazonMenu" Text="Amazon" Foreground="White">
+                                                <MenuFlyoutItem x:Name="WebAmazonUK" Text="Amazon UK" Click="WebLink_Click" Tag="https://www.amazon.co.uk?tag=panomiuk-21" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebAmazonUS" Text="Amazon US" Click="WebLink_Click" Tag="https://www.amazon.com?tag=panomi-20" Foreground="White"/>
+                                            </MenuFlyoutSubItem>
+                                            <MenuFlyoutSubItem x:Name="WebStoresGamesMenu" Text="Games" Foreground="White">
+                                                <MenuFlyoutItem x:Name="WebFanatical" Text="Fanatical" Click="WebLink_Click" Tag="https://www.fanatical.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebGMG" Text="GMG" Click="WebLink_Click" Tag="https://www.greenmangaming.com" Foreground="White"/>
+                                                <MenuFlyoutItem x:Name="WebHumbleBundle" Text="Humble Bundle" Click="WebLink_Click" Tag="https://www.humblebundle.com" Foreground="White"/>
+                                            </MenuFlyoutSubItem>
                                         </MenuFlyoutSubItem>
                                         
                                         <!-- Support -->
@@ -337,17 +348,41 @@
                                                 </StackPanel>
                                             </Button.Content>
                                             <Button.Flyout>
-                                                <Flyout x:Name="LanguageFlyout" Placement="LeftEdgeAlignedTop" Closed="LanguageFlyout_Closed">
+                                                <Flyout x:Name="LanguageFlyout" Placement="Left" Closed="LanguageFlyout_Closed">
                                                     <Flyout.FlyoutPresenterStyle>
                                                         <Style TargetType="FlyoutPresenter">
                                                             <Setter Property="Background" Value="#0f1114"/>
                                                             <Setter Property="BorderBrush" Value="#2a2a2f"/>
                                                             <Setter Property="BorderThickness" Value="1"/>
-                                                            <Setter Property="Padding" Value="8"/>
+                                                            <Setter Property="Padding" Value="8,8,0,8"/>
                                                             <Setter Property="CornerRadius" Value="8"/>
+                                                            <Setter Property="MaxHeight" Value="800"/>
+                                                            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+                                                            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
                                                         </Style>
                                                     </Flyout.FlyoutPresenterStyle>
-                                                    <StackPanel x:Name="LanguagePanel" MinWidth="120" Spacing="2" XYFocusKeyboardNavigation="Enabled"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="8"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <ScrollViewer x:Name="LanguageScrollViewer" Grid.Column="0" VerticalScrollBarVisibility="Hidden" MaxHeight="750" ViewChanged="LanguageScrollViewer_ViewChanged">
+                                                            <StackPanel x:Name="LanguagePanel" MinWidth="120" Spacing="2" XYFocusKeyboardNavigation="Enabled"/>
+                                                        </ScrollViewer>
+                                                        <Grid x:Name="LanguageScrollTrack" Grid.Column="1" Background="#1a1a1f" CornerRadius="4"
+                                                              PointerPressed="LanguageScrollTrack_PointerPressed">
+                                                            <Border x:Name="LanguageScrollThumb" 
+                                                                    Background="#666666" 
+                                                                    CornerRadius="4"
+                                                                    VerticalAlignment="Top"
+                                                                    Height="50"
+                                                                    Margin="1"
+                                                                    PointerPressed="LanguageScrollThumb_PointerPressed"
+                                                                    PointerMoved="LanguageScrollThumb_PointerMoved"
+                                                                    PointerReleased="LanguageScrollThumb_PointerReleased"
+                                                                    PointerCaptureLost="LanguageScrollThumb_PointerReleased"/>
+                                                        </Grid>
+                                                    </Grid>
                                                 </Flyout>
                                             </Button.Flyout>
                                         </Button>

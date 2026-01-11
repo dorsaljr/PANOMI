@@ -41,13 +41,11 @@ PANOMI is a lightweight, offline-first Windows game launcher aggregator that con
 
 - **Automatic game detection** from 14+ launcher platforms
 - **Icon extraction** from installed executables (Shell API)
-- **Manual game adding** with custom launch commands
 - **Search, filter, sort** with smart filtering
-- **Recently played tracking** with visual indicators
 - **Favorites system** with pinned games
 - **Multi-language support** (29 languages)
 - **Auto-updates** via Velopack
-- **Compact card UI** with hover-reveal play buttons
+- **Compact card UI** easy to find games and launchers
 
 ---
 

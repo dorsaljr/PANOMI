@@ -19,7 +19,7 @@ A unified game launcher that detects and organizes all your games and launchers 
 - **Secondary/Label text:** `#888888` (gray)
 
 ### Accent Colors
-- **Primary accent:** `#00d4ff` (cyan)
+- **Primary accent:** `#00d4ff` (dark blue)
 - **Favorite star:** `#facc15` (yellow)
 - **Update button:** `#4ade80` (green)
 

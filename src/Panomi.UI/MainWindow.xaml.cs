@@ -43,6 +43,11 @@ public sealed partial class MainWindow : Window
     private double _dragStartY = 0;
     private double _dragStartScrollOffset = 0;
     
+    // Language scrollbar drag state
+    private bool _isDraggingLanguageThumb = false;
+    private double _langDragStartY = 0;
+    private double _langDragStartScrollOffset = 0;
+    
     // Track button currently showing "Launching..." for language updates
     private LibraryItem? _launchingButton = null;
     
@@ -834,6 +839,89 @@ public sealed partial class MainWindow : Window
         var newOffset = clickRatio * MainScrollViewer.ScrollableHeight;
         newOffset = Math.Max(0, Math.Min(newOffset, MainScrollViewer.ScrollableHeight));
         MainScrollViewer.ChangeView(null, newOffset, null, false);
+        e.Handled = true;
+    }
+    
+    // Language flyout custom scrollbar handlers
+    private void LanguageScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+    {
+        if (!_isDraggingLanguageThumb)
+        {
+            UpdateLanguageScrollBar();
+        }
+    }
+    
+    private void UpdateLanguageScrollBar()
+    {
+        if (LanguageScrollViewer.ScrollableHeight <= 0)
+        {
+            LanguageScrollTrack.Visibility = Visibility.Collapsed;
+            return;
+        }
+        
+        LanguageScrollTrack.Visibility = Visibility.Visible;
+        var trackHeight = LanguageScrollViewer.ActualHeight;
+        var viewportRatio = LanguageScrollViewer.ViewportHeight / LanguageScrollViewer.ExtentHeight;
+        var thumbHeight = Math.Max(30, trackHeight * viewportRatio);
+        LanguageScrollThumb.Height = thumbHeight;
+        
+        var scrollRatio = LanguageScrollViewer.VerticalOffset / LanguageScrollViewer.ScrollableHeight;
+        var maxThumbOffset = trackHeight - thumbHeight;
+        var thumbOffset = scrollRatio * maxThumbOffset;
+        LanguageScrollThumb.Margin = new Thickness(1, thumbOffset, 1, 1);
+    }
+    
+    private void LanguageScrollThumb_PointerPressed(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        _isDraggingLanguageThumb = true;
+        _langDragStartY = e.GetCurrentPoint(LanguageScrollTrack).Position.Y;
+        _langDragStartScrollOffset = LanguageScrollViewer.VerticalOffset;
+        LanguageScrollThumb.CapturePointer(e.Pointer);
+        e.Handled = true;
+    }
+    
+    private void LanguageScrollThumb_PointerMoved(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        if (_isDraggingLanguageThumb)
+        {
+            var currentY = e.GetCurrentPoint(LanguageScrollTrack).Position.Y;
+            var deltaY = currentY - _langDragStartY;
+            
+            var trackHeight = LanguageScrollViewer.ActualHeight;
+            var thumbHeight = LanguageScrollThumb.Height;
+            var scrollableTrack = trackHeight - thumbHeight;
+            
+            if (scrollableTrack > 0)
+            {
+                var scrollRatio = deltaY / scrollableTrack;
+                var newOffset = _langDragStartScrollOffset + (scrollRatio * LanguageScrollViewer.ScrollableHeight);
+                newOffset = Math.Max(0, Math.Min(newOffset, LanguageScrollViewer.ScrollableHeight));
+                LanguageScrollViewer.ChangeView(null, newOffset, null, true);
+                UpdateLanguageScrollBar();
+            }
+            e.Handled = true;
+        }
+    }
+    
+    private void LanguageScrollThumb_PointerReleased(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        if (_isDraggingLanguageThumb)
+        {
+            _isDraggingLanguageThumb = false;
+            LanguageScrollThumb.ReleasePointerCapture(e.Pointer);
+            e.Handled = true;
+        }
+    }
+    
+    private void LanguageScrollTrack_PointerPressed(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        var clickY = e.GetCurrentPoint(LanguageScrollTrack).Position.Y;
+        var trackHeight = LanguageScrollViewer.ActualHeight;
+        
+        var clickRatio = clickY / trackHeight;
+        var newOffset = clickRatio * LanguageScrollViewer.ScrollableHeight;
+        newOffset = Math.Max(0, Math.Min(newOffset, LanguageScrollViewer.ScrollableHeight));
+        LanguageScrollViewer.ChangeView(null, newOffset, null, false);
         e.Handled = true;
     }
 
