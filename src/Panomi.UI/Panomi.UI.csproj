@@ -26,6 +26,17 @@
     <Description>Unified Game Launcher</Description>
   </PropertyGroup>
 
+  <!-- Store build configuration -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Store'">
+    <DefineConstants>$(DefineConstants);STORE_BUILD</DefineConstants>
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <AppxPackage>true</AppxPackage>
+    <AppxBundle>Never</AppxBundle>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
+    <PublishReadyToRun>false</PublishReadyToRun>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="Assets\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -37,6 +48,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.8" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <!-- Velopack only for GitHub releases, not Store -->
+  <ItemGroup Condition="'$(Configuration)' != 'Store'">
     <PackageReference Include="Velopack" Version="0.0.1298" />
   </ItemGroup>
 

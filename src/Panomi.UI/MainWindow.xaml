@@ -73,6 +73,7 @@
                                         </MenuFlyout.MenuFlyoutPresenterStyle>
                                         <MenuFlyoutItem x:Name="AIChatGPT" Text="ChatGPT" Click="WebLink_Click" Tag="https://chat.openai.com" Foreground="White"/>
                                         <MenuFlyoutItem x:Name="AIClaude" Text="Claude" Click="WebLink_Click" Tag="https://claude.ai" Foreground="White"/>
+                                        <MenuFlyoutItem x:Name="AICopilot" Text="Copilot" Click="WebLink_Click" Tag="https://copilot.microsoft.com" Foreground="White"/>
                                         <MenuFlyoutItem x:Name="AIDeepSeek" Text="DeepSeek" Click="WebLink_Click" Tag="https://chat.deepseek.com" Foreground="White"/>
                                         <MenuFlyoutItem x:Name="AIGemini" Text="Gemini" Click="WebLink_Click" Tag="https://gemini.google.com" Foreground="White"/>
                                         <MenuFlyoutItem x:Name="AIGrok" Text="Grok" Click="WebLink_Click" Tag="https://grok.x.ai" Foreground="White"/>

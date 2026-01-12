@@ -56,8 +56,10 @@ public partial class App : Application
             }
         });
         
+#if !STORE_BUILD
         // Initialize Velopack first (required for updates to work)
         UpdateService.Initialize();
+#endif
         
         this.InitializeComponent();
         

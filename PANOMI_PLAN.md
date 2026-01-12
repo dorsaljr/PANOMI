@@ -80,8 +80,8 @@ PANOMI/
 
 ## Links
 
-- **Download**: [GitHub Pages](https://dorsaljr.github.io/PANOMI_BETA/)
-- **Releases**: [GitHub Releases](https://github.com/dorsaljr/PANOMI_BETA/releases)
+- **Download**: [GitHub Pages](https://dorsaljr.github.io/PANOMI/)
+- **Releases**: [GitHub Releases](https://github.com/dorsaljr/PANOMI/releases)
 - **Source**: Private repository
 
 ---

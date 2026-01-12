@@ -375,14 +375,33 @@ public class GameService : IGameService
                     var existingGame = existingGames
                         .FirstOrDefault(g => g.ExternalId == detectedGame.ExternalId);
 
-                    // Extract game icon from executable
+                    // Extract game icon
                     string? iconPath = null;
-                    if (!string.IsNullOrEmpty(detectedGame.ExecutablePath) && !string.IsNullOrEmpty(detectedGame.ExternalId))
+                    if (!string.IsNullOrEmpty(detectedGame.ExternalId))
                     {
-                        iconPath = _iconService.ExtractAndCacheIcon(
-                            detectedGame.ExecutablePath, 
-                            launcher.Type, 
-                            detectedGame.ExternalId);
+                        // For Steam, use Steam's icon cache first (most reliable)
+                        if (launcher.Type == LauncherType.Steam && !string.IsNullOrEmpty(result.InstallPath))
+                        {
+                            iconPath = _iconService.GetSteamCachedIcon(result.InstallPath, detectedGame.ExternalId);
+                        }
+                        
+                        // Check for .ico files in game folder (developer-provided icons are reliable)
+                        if (iconPath == null && !string.IsNullOrEmpty(detectedGame.InstallPath))
+                        {
+                            iconPath = _iconService.ExtractIconFromFolder(
+                                detectedGame.InstallPath,
+                                launcher.Type,
+                                detectedGame.ExternalId);
+                        }
+                        
+                        // Last resort: exe extraction (can sometimes return generic Windows icon)
+                        if (iconPath == null && !string.IsNullOrEmpty(detectedGame.ExecutablePath))
+                        {
+                            iconPath = _iconService.ExtractAndCacheIcon(
+                                detectedGame.ExecutablePath, 
+                                launcher.Type, 
+                                detectedGame.ExternalId);
+                        }
                     }
 
                     if (existingGame == null)

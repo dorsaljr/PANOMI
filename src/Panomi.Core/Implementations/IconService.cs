@@ -194,4 +194,85 @@ public class IconService : IIconService
         
         return sanitized.Trim();
     }
+    
+    /// <summary>
+    /// Get icon from Steam's library cache - more reliable than exe extraction
+    /// Steam caches icons at: {steamPath}/appcache/librarycache/{appId}_icon.jpg
+    /// </summary>
+    public string? GetSteamCachedIcon(string steamPath, string appId)
+    {
+        if (string.IsNullOrEmpty(steamPath) || string.IsNullOrEmpty(appId))
+            return null;
+        
+        var cacheFileName = $"Steam_{appId}.png";
+        var cachePath = Path.Combine(_iconsFolderPath, cacheFileName);
+        
+        // Return our cached copy if it exists
+        if (File.Exists(cachePath))
+            return cachePath;
+        
+        // Check Steam's icon cache
+        var steamIconPath = Path.Combine(steamPath, "appcache", "librarycache", $"{appId}_icon.jpg");
+        if (!File.Exists(steamIconPath))
+            return null;
+        
+        // Ensure folder exists
+        EnsureIconsFolderExists();
+        
+        try
+        {
+            // Load and convert to PNG for consistency
+            using var image = Image.FromFile(steamIconPath);
+            using var bitmap = new Bitmap(image);
+            bitmap.Save(cachePath, ImageFormat.Png);
+            return cachePath;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    
+    /// <summary>
+    /// Search for .ico files in game install folder as fallback
+    /// </summary>
+    public string? ExtractIconFromFolder(string installPath, LauncherType launcherType, string externalId)
+    {
+        if (string.IsNullOrEmpty(installPath) || !Directory.Exists(installPath))
+            return null;
+        
+        var cacheFileName = $"{launcherType}_{SanitizeFileName(externalId)}_ico.png";
+        var cachePath = Path.Combine(_iconsFolderPath, cacheFileName);
+        
+        // Return cached icon if it exists
+        if (File.Exists(cachePath))
+            return cachePath;
+        
+        try
+        {
+            // Search for .ico files in root folder
+            var icoFiles = Directory.GetFiles(installPath, "*.ico", SearchOption.TopDirectoryOnly);
+            
+            if (icoFiles.Length == 0)
+                return null;
+            
+            // Prefer common icon names
+            var preferredNames = new[] { "icon", "game", "app", "logo" };
+            var icoFile = icoFiles.FirstOrDefault(f => 
+                preferredNames.Any(p => Path.GetFileNameWithoutExtension(f).ToLowerInvariant().Contains(p)))
+                ?? icoFiles[0];
+            
+            EnsureIconsFolderExists();
+            
+            // Load .ico and save as PNG
+            using var icon = new Icon(icoFile, 256, 256);
+            using var bitmap = icon.ToBitmap();
+            bitmap.Save(cachePath, ImageFormat.Png);
+            return cachePath;
+        }
+        catch
+        {
+            return null;
+        }
+    }
 }

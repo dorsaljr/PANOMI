@@ -1,26 +1,32 @@
 using System.Diagnostics;
+#if !STORE_BUILD
 using Velopack;
 using Velopack.Sources;
+#endif
 
 namespace Panomi.UI.Services;
 
 /// <summary>
 /// Handles automatic updates via GitHub Releases using Velopack.
 /// Silent by default - no UI interruption unless update ready to apply.
+/// Disabled for Microsoft Store builds (Store handles updates).
 /// </summary>
 public static class UpdateService
 {
+#if !STORE_BUILD
     // GitHub repo for auto-updates
-    private const string GitHubRepoUrl = "https://github.com/dorsaljr/PANOMI_BETA";
+    private const string GitHubRepoUrl = "https://github.com/dorsaljr/PANOMI";
     
     private static UpdateManager? _updateManager;
     private static UpdateInfo? _pendingUpdate;
+#endif
 
     /// <summary>
     /// Initialize Velopack on app startup (call from Main/App constructor)
     /// </summary>
     public static void Initialize()
     {
+#if !STORE_BUILD
         try
         {
             VelopackApp.Build().Run();
@@ -29,6 +35,7 @@ public static class UpdateService
         {
             Debug.WriteLine($"[Panomi] Velopack init error: {ex.Message}");
         }
+#endif
     }
 
     /// <summary>
@@ -36,6 +43,7 @@ public static class UpdateService
     /// </summary>
     public static async Task CheckForUpdatesAsync()
     {
+#if !STORE_BUILD
         try
         {
             var source = new GithubSource(GitHubRepoUrl, null, false);
@@ -68,23 +76,35 @@ public static class UpdateService
             // Silent failure - don't interrupt user
             Debug.WriteLine($"[Panomi] Update check failed: {ex.Message}");
         }
+#else
+        await Task.CompletedTask; // Store handles updates
+#endif
     }
 
     /// <summary>
     /// Returns true if an update has been downloaded and is ready to install
     /// </summary>
+#if !STORE_BUILD
     public static bool HasPendingUpdate => _pendingUpdate != null;
+#else
+    public static bool HasPendingUpdate => false;
+#endif
 
     /// <summary>
     /// Get the version of the pending update, if any
     /// </summary>
+#if !STORE_BUILD
     public static string? PendingVersion => _pendingUpdate?.TargetFullRelease.Version.ToString();
+#else
+    public static string? PendingVersion => null;
+#endif
 
     /// <summary>
     /// Apply the pending update and restart the app
     /// </summary>
     public static void ApplyUpdateAndRestart()
     {
+#if !STORE_BUILD
         if (_updateManager != null && _pendingUpdate != null)
         {
             try
@@ -96,6 +116,7 @@ public static class UpdateService
                 Debug.WriteLine($"[Panomi] Failed to apply update: {ex.Message}");
             }
         }
+#endif
     }
 
     /// <summary>
@@ -103,6 +124,7 @@ public static class UpdateService
     /// </summary>
     public static void ApplyUpdateOnExit()
     {
+#if !STORE_BUILD
         if (_updateManager != null && _pendingUpdate != null)
         {
             try
@@ -114,5 +136,6 @@ public static class UpdateService
                 Debug.WriteLine($"[Panomi] Failed to apply update on exit: {ex.Message}");
             }
         }
+#endif
     }
 }
