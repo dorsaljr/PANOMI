@@ -20,7 +20,7 @@ echo.
 
 REM Clean previous builds
 echo [1/4] Cleaning previous builds...
-if exist "release" rmdir /s /q "release"
+if exist "releases" rmdir /s /q "releases"
 if exist "publish" rmdir /s /q "publish"
 
 REM Publish the app
@@ -34,7 +34,7 @@ if %ERRORLEVEL% neq 0 (
 
 REM Package with Velopack
 echo [3/4] Creating Velopack installer...
-vpk pack --packId Panomi --packVersion %VERSION% --packDir ./publish --mainExe Panomi.UI.exe --outputDir ./release --icon src/Panomi.UI/Assets/logo_ico.ico
+vpk pack --packId Panomi --packVersion %VERSION% --packDir ./publish --mainExe Panomi.UI.exe --outputDir ./releases --icon src/Panomi.UI/Assets/logo_ico.ico
 
 if %ERRORLEVEL% neq 0 (
     echo ERROR: Velopack packaging failed!
@@ -47,9 +47,9 @@ echo ========================================
 echo  Build Complete!
 echo ========================================
 echo.
-echo Release files in: release/
+echo Release files in: releases/
 echo.
 echo Upload these files to GitHub Releases:
-dir /b release\
+dir /b releases\
 echo.
 echo Done!
