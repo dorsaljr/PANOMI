@@ -9,13 +9,13 @@
   <Identity
     Name="Panomi"
     Publisher="CN=Panomi"
-    Version="1.4.3.0"
+    Version="1.4.4.0"
     ProcessorArchitecture="x64" />
 
   <mp:PhoneIdentity PhoneProductId="9e8f3c2a-1b4d-5e6f-7a8b-9c0d1e2f3a4b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Panomi</DisplayName>
+    <DisplayName>PANOMI</DisplayName>
     <PublisherDisplayName>Panomi</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -33,7 +33,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Panomi"
+        DisplayName="PANOMI"
         Description="Unified Game Launcher - All your games, one place"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
