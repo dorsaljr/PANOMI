@@ -1857,6 +1857,29 @@ public sealed partial class MainWindow : Window
     {
         // Handled by style
     }
+    
+    /// <summary>
+    /// Creates and applies a styled "Sponsored" tooltip to an element.
+    /// Use this for any sponsored content to maintain visual consistency.
+    /// </summary>
+    private static void ApplySponsoredTooltip(FrameworkElement element)
+    {
+        var tooltip = new ToolTip
+        {
+            Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 15, 17, 20)),
+            BorderBrush = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 42, 42, 47)),
+            BorderThickness = new Thickness(1),
+            CornerRadius = new CornerRadius(8),
+            Padding = new Thickness(12, 8, 12, 8),
+            Content = new TextBlock
+            {
+                Text = Loc.Get("Sponsored"),
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 12
+            }
+        };
+        ToolTipService.SetToolTip(element, tooltip);
+    }
 }
 
 public class FilterSettings
