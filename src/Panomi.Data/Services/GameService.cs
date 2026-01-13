@@ -379,14 +379,8 @@ public class GameService : IGameService
                     string? iconPath = null;
                     if (!string.IsNullOrEmpty(detectedGame.ExternalId))
                     {
-                        // For Steam, use Steam's icon cache first (most reliable)
-                        if (launcher.Type == LauncherType.Steam && !string.IsNullOrEmpty(result.InstallPath))
-                        {
-                            iconPath = _iconService.GetSteamCachedIcon(result.InstallPath, detectedGame.ExternalId);
-                        }
-                        
                         // Check for .ico files in game folder (developer-provided icons are reliable)
-                        if (iconPath == null && !string.IsNullOrEmpty(detectedGame.InstallPath))
+                        if (!string.IsNullOrEmpty(detectedGame.InstallPath))
                         {
                             iconPath = _iconService.ExtractIconFromFolder(
                                 detectedGame.InstallPath,
@@ -394,7 +388,7 @@ public class GameService : IGameService
                                 detectedGame.ExternalId);
                         }
                         
-                        // Last resort: exe extraction (can sometimes return generic Windows icon)
+                        // Fallback: exe extraction (can sometimes return generic Windows icon)
                         if (iconPath == null && !string.IsNullOrEmpty(detectedGame.ExecutablePath))
                         {
                             iconPath = _iconService.ExtractAndCacheIcon(

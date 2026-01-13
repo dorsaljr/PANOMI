@@ -50,12 +50,6 @@ public interface IIconService
     string? GetLauncherIconPath(LauncherType launcherType);
     
     /// <summary>
-    /// Get icon from Steam's library cache (more reliable than exe extraction)
-    /// Steam caches icons at: {steamPath}/appcache/librarycache/{appId}_icon.jpg
-    /// </summary>
-    string? GetSteamCachedIcon(string steamPath, string appId);
-    
-    /// <summary>
     /// Search for .ico files in game install folder as fallback
     /// </summary>
     string? ExtractIconFromFolder(string installPath, LauncherType launcherType, string externalId);
