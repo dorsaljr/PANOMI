@@ -624,7 +624,7 @@ public sealed partial class MainWindow : Window
         _trayIcon = new TaskbarIcon
         {
             IconSource = new BitmapImage(new Uri("ms-appx:///Assets/logo_ico.ico")),
-            ToolTipText = "Panomi",
+            ToolTipText = "PANOMI",
             NoLeftClickDelay = true
         };
         
