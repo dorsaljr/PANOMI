@@ -26,7 +26,7 @@ if exist "store-publish" rmdir /s /q "store-publish"
 
 REM Publish for Store (uses Store configuration, no Velopack)
 echo [2/3] Building MSIX for Microsoft Store...
-dotnet build src/Panomi.UI/Panomi.UI.csproj -c Store -p:Platform=x64
+dotnet publish src/Panomi.UI/Panomi.UI.csproj -c Store -p:Platform=x64 -p:RuntimeIdentifier=win-x64
 
 if %ERRORLEVEL% neq 0 (
     echo ERROR: Publish failed!
