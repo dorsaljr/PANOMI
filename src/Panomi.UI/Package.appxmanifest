@@ -18,10 +18,11 @@
     <DisplayName>PANOMI</DisplayName>
     <PublisherDisplayName>Panomi</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
+    <uap:PrivacyPolicyUrl>https://dorsaljr.github.io/PANOMI/#privacy</uap:PrivacyPolicyUrl>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.22621.0" />
   </Dependencies>
 
   <Resources>
