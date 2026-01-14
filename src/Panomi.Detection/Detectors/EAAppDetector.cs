@@ -1,6 +1,3 @@
-using GameFinder.StoreHandlers.EADesktop;
-using GameFinder.StoreHandlers.EADesktop.Crypto.Windows;
-using NexusMods.Paths;
 using Panomi.Core.Models;
 
 namespace Panomi.Detection.Detectors;
@@ -41,15 +38,7 @@ public class EAAppDetector : BaseLauncherDetector
         result.IsInstalled = true;
         result.InstallPath = eaPath;
 
-        // Primary: Use GameFinder to decrypt EA's install path database (finds games on any drive)
-        var gameFinderGames = GetGamesFromGameFinder();
-        foreach (var game in gameFinderGames)
-        {
-            if (!result.Games.Any(g => g.Name == game.Name))
-                result.Games.Add(game);
-        }
-
-        // Secondary: Read game paths from registry
+        // Primary: Read game paths from registry
         var registryGames = GetGamesFromRegistry();
         foreach (var game in registryGames)
         {
@@ -91,62 +80,6 @@ public class EAAppDetector : BaseLauncherDetector
         }
 
         return Task.FromResult(result);
-    }
-
-    private List<DetectedGame> GetGamesFromGameFinder()
-    {
-        var games = new List<DetectedGame>();
-        
-        try
-        {
-            var fileSystem = FileSystem.Shared;
-            var hardwareInfoProvider = new HardwareInfoProvider();
-            var handler = new EADesktopHandler(fileSystem, hardwareInfoProvider);
-            var results = handler.FindAllGames();
-            
-            foreach (var result in results)
-            {
-                // GameFinder returns OneOf<EADesktopGame, ErrorMessage>
-                // Check if it's a game (not an error)
-                if (result.IsT0)
-                {
-                    var eaGame = result.AsT0;
-                    var installDir = eaGame.BaseInstallPath.ToString();
-                    if (!string.IsNullOrEmpty(installDir) && Directory.Exists(installDir))
-                    {
-                        // Find the main executable using our existing logic
-                        var exePath = FindMainExecutable(installDir);
-                    
-                        // Build launch command using EA's content ID
-                        var contentId = eaGame.EADesktopGameId.Value;
-                        string? launchCommand = null;
-                        if (!string.IsNullOrEmpty(contentId))
-                            launchCommand = $"origin://launchgame/{contentId}";
-                        else if (!string.IsNullOrEmpty(exePath))
-                            launchCommand = exePath;
-                    
-                        // BaseSlug is the game's identifier (e.g., "the-sims-4")
-                        var gameName = CleanGameTitle(eaGame.BaseSlug.Replace("-", " "));
-                            
-                        games.Add(new DetectedGame
-                        {
-                            Name = gameName,
-                            ExternalId = contentId ?? eaGame.BaseSlug,
-                            InstallPath = installDir,
-                            ExecutablePath = exePath,
-                            LaunchCommand = launchCommand
-                        });
-                    }
-                }
-            }
-        }
-        catch
-        {
-            // GameFinder may fail if EA Desktop isn't installed or decryption fails
-            // Fall back to other detection methods
-        }
-        
-        return games;
     }
 
     private List<DetectedGame> ScanDriveRootsForEAGames()

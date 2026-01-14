@@ -10,9 +10,4 @@
     <ProjectReference Include="..\Panomi.Core\Panomi.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GameFinder.StoreHandlers.EADesktop" Version="4.3.2" />
-    <PackageReference Include="NexusMods.Paths" Version="0.10.0" />
-  </ItemGroup>
-
 </Project>
