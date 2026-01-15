@@ -18,7 +18,6 @@
     <DisplayName>PANOMI</DisplayName>
     <PublisherDisplayName>PANOMI LTD</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
-    <uap:PrivacyPolicyUrl>https://dorsaljr.github.io/PANOMI/#privacy</uap:PrivacyPolicyUrl>
   </Properties>
 
   <Dependencies>
