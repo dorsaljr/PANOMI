@@ -7,8 +7,8 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="Panomi"
-    Publisher="CN=Panomi"
+    Name="PANOMILTD.PANOMI"
+    Publisher="CN=EBAD4DD5-4534-4296-91A3-DF2CD039E943"
     Version="1.4.7.0"
     ProcessorArchitecture="x64" />
 
@@ -16,7 +16,7 @@
 
   <Properties>
     <DisplayName>PANOMI</DisplayName>
-    <PublisherDisplayName>Panomi</PublisherDisplayName>
+    <PublisherDisplayName>PANOMI LTD</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
     <uap:PrivacyPolicyUrl>https://dorsaljr.github.io/PANOMI/#privacy</uap:PrivacyPolicyUrl>
   </Properties>
