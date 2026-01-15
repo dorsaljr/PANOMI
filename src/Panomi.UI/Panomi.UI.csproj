@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
     <RootNamespace>Panomi.UI</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;ARM64</Platforms>
@@ -18,9 +18,9 @@
     <ApplicationIcon>Assets\logo_ico.ico</ApplicationIcon>
     
     <!-- Version info for Velopack -->
-    <Version>1.4.7</Version>
-    <AssemblyVersion>1.4.7.0</AssemblyVersion>
-    <FileVersion>1.4.7.0</FileVersion>
+    <Version>1.4.9</Version>
+    <AssemblyVersion>1.4.9.0</AssemblyVersion>
+    <FileVersion>1.4.9.0</FileVersion>
     <Product>PANOMI</Product>
     <Company>Panomi</Company>
     <Description>Unified Game Launcher</Description>
