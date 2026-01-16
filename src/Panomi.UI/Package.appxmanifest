@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="PANOMILTD.PANOMI"
+    Name="PANOMILTD.4084549CFFDCA"
     Publisher="CN=EBAD4DD5-4534-4296-91A3-DF2CD039E943"
     Version="1.4.9.0"
     ProcessorArchitecture="x64" />
@@ -16,7 +16,7 @@
 
   <Properties>
     <DisplayName>PANOMI</DisplayName>
-    <PublisherDisplayName>PANOMI LTD</PublisherDisplayName>
+    <PublisherDisplayName>PANOMI</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
