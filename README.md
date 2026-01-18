@@ -12,15 +12,18 @@ PANOMI automatically detects your installed game launchers and games, giving you
 - 🚀 **Quick Launch** - Minimize to tray for instant access
 - 🌍 **29 Languages** - English, Español, Português, Français, Deutsch, Italiano, 한국어, 日本語, 中文, हिन्दी, Русский, Polski, Türkçe, العربية, اردو, Українська, Indonesia, Tiếng Việt, ไทย, فارسی, বাংলা, Kiswahili, Ελληνικά, Română, Čeština, Српски, Nederlands, Shqip, Tagalog
 - 🖥️ **Fullscreen Mode** - Controller-friendly big picture experience
-- 🔄 **Auto-updates** - Seamless updates via Velopack
+- 🔄 **Auto-updates** - Seamless updates via Velopack/MS Store
+- 🔗 **Quick Web Links** - Streaming, social, AI chatbots
 
 ## Privacy & Security
 
 - ✅ **No telemetry** - Zero data collection
-- ✅ **No accounts** - Works completely offline
+- ✅ **No accounts** - No sign up needed
+- ✅ **Works offline** - Core functions work
 - ✅ **Local only** - All data stays on your PC
 - ✅ **Open source** - MIT licensed, audit the code yourself
-- ✅ **Signed & Certified** - Code signed with Microsoft Azure Trusted Signing certificate
+- ✅ **Available on MS Store** - Certified and available on the MS Store
+- ✅ **No Files Modified** - File integrity is respected
 
 ## How It Works
 
