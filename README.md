@@ -79,6 +79,6 @@ Some links may be affiliate links, which help support PANOMI at no extra cost to
 ## Links
 
 - [Download](https://dorsaljr.github.io/PANOMI/)
-- [Linktree](https://linktr.ee/panomiltd)
+- [Linktree](https://linktr.ee/panomi)
 - [GitHub](https://github.com/dorsaljr/PANOMI)
 

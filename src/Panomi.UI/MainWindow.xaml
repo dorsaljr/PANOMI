@@ -191,7 +191,7 @@
                                         
                                         <!-- Support -->
                                         <MenuFlyoutSubItem x:Name="WebSupportMenu" Text="Support" Foreground="White">
-                                            <MenuFlyoutItem x:Name="WebLinktree" Text="Linktree" Click="WebLink_Click" Tag="https://linktr.ee/panomiltd" Foreground="White"/>
+                                            <MenuFlyoutItem x:Name="WebLinktree" Text="Linktree" Click="WebLink_Click" Tag="https://linktr.ee/panomi" Foreground="White"/>
                                         </MenuFlyoutSubItem>
                                         
                                     </MenuFlyout>
