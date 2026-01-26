@@ -8,10 +8,10 @@ PANOMI automatically detects your installed game launchers and games, giving you
 
 ## Features
 
-- 🎮 **Auto-detection** - Finds Steam, Epic Games, GOG Galaxy, EA App, Ubisoft Connect, Battle.net, Riot Games, Rockstar Games, Minecraft, and Roblox
+- 🎮 **Quick-detection** - Finds Steam, Epic Games, GOG Galaxy, EA App, Ubisoft Connect, Battle.net, Riot Games, Rockstar Games, Minecraft, and Roblox
 - 🚀 **Quick Launch** - Minimize to tray for instant access
 - 🌍 **29 Languages** - English, Español, Português, Français, Deutsch, Italiano, 한국어, 日本語, 中文, हिन्दी, Русский, Polski, Türkçe, العربية, اردو, Українська, Indonesia, Tiếng Việt, ไทย, فارسی, বাংলা, Kiswahili, Ελληνικά, Română, Čeština, Српски, Nederlands, Shqip, Tagalog
-- 🖥️ **Fullscreen Mode** - Controller-friendly big picture experience
+- 🖥️ **Fullscreen Mode** - Big picture experience
 - 🔄 **Auto-updates** - Seamless updates via Velopack/MS Store
 - 🔗 **Quick Web Links** - Streaming, social, AI chatbots
 
